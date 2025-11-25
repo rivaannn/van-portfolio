@@ -28,7 +28,10 @@
     "latest_title": "Here are a few of my favorite projects.",
     "view_all": "View All Projects",
     "page_title": "Selected Works",
-    "page_subtitle": "A gallery of my recent development projects."
+    "page_subtitle": "A gallery of my recent development projects.",
+    "unavailable_title": "Project Under Development",
+    "unavailable_desc": "This project is currently in development and not yet publicly accessible. Please check back later or explore the source code on GitHub.",
+    "close": "Close"
   },
   "cta": {
     "badge": "Let's Work Together",

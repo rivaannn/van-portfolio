@@ -25,10 +25,13 @@
   },
   "projects": {
     "badge": "Karya Unggulan",
-    "latest_title": "Berikut adalah beberapa proyek favorit saya.",
+    "latest_title": "Berikut beberapa proyek favorit saya.",
     "view_all": "Lihat Semua Proyek",
     "page_title": "Karya Terpilih",
-    "page_subtitle": "Galeri proyek pengembangan terbaru saya."
+    "page_subtitle": "Galeri proyek pengembangan terbaru saya.",
+    "unavailable_title": "Proyek Sedang Dikembangkan",
+    "unavailable_desc": "Proyek ini sedang dalam tahap pengembangan dan belum dapat diakses secara publik. Silakan cek kembali nanti atau jelajahi kode sumber di GitHub.",
+    "close": "Tutup"
   },
   "cta": {
     "badge": "Mari Bekerja Sama",

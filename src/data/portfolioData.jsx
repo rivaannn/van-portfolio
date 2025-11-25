@@ -1,4 +1,6 @@
-import BalsamiqIcon from "../assets/LogoTech/balsamiq.svg";
+import BalsamiqIcon from "@/assets/LogoTech/balsamiq.svg";
+import ewastepasImg from "@/assets/images/project/ewastepas.png";
+import babygrowthImg from "@/assets/images/project/babygrowth.png";
 import BootstrapIcon from "../assets/LogoTech/boostrap.svg";
 import CssIcon from "../assets/LogoTech/css.svg";
 import FigmaIcon from "../assets/LogoTech/figma.svg";
@@ -265,18 +267,18 @@ export const PROJECTS_DATA = [
     title: "EWastepas",
     desc: "data.ewastepas_desc",
     tech: ["React", "Tailwind", "Maps API"],
-    image: "https://placehold.co/600x400/1a1a1a/FFF?text=EWastepas",
-    link: "#",
-    repo: "#",
+    image: ewastepasImg,
+    link: "https://ewastepas.my.id",
+    repo: "https://github.com/orgs/Ewastepas/repositories",
   },
   {
     id: 2,
     title: "BabyGrowth",
     desc: "data.babygrowth_desc",
     tech: ["Node.js", "Hapi.js", "GCP", "Machine Learning"],
-    image: "https://placehold.co/600x400/1a1a1a/FFF?text=BabyGrowth",
-    link: "#",
-    repo: "#",
+    image: babygrowthImg,
+    link: null,
+    repo: "https://github.com/Baby-Growth/backend-babygrowth",
   },
 ];
 
