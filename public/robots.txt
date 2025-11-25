@@ -1,0 +1,6 @@
+# robots.txt for van-portfolio
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://rivansh.vercel.app/sitemap.xml

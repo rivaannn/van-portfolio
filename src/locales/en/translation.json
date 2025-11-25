@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "journey": "Journey",
+    "experience": "Experience",
+    "education": "Education",
+    "projects": "Projects",
+    "contact": "Contact",
+    "resume": "Resume"
+  },
+  "hero": {
+    "available": "Available for new projects",
+    "title_1": "Building digital",
+    "title_highlight": "experiences",
+    "title_2": "that matter.",
+    "intro": "I'm <1>M Rivan Sahronie</1>, a Web Developer & UI/UX Designer passionate about contributing to the digital world through creative and innovative solutions.",
+    "view_work": "Tell me more"
+  },
+  "skills": {
+    "badge": "Technologies",
+    "title": "Tech Stack",
+    "subtitle": "The technologies I use to build amazing products."
+  },
+  "projects": {
+    "badge": "Featured Work",
+    "latest_title": "Here are a few of my favorite projects.",
+    "view_all": "View All Projects",
+    "page_title": "Selected Works",
+    "page_subtitle": "A gallery of my recent development projects."
+  },
+  "cta": {
+    "badge": "Let's Work Together",
+    "title": "Interested in Working Together?",
+    "subtitle": "Have an exciting project idea? Let's discuss and bring it to life together.",
+    "button": "Get in Touch"
+  },
+  "about": {
+    "badge": "About Me",
+    "title": "Beyond the Code",
+    "subtitle": "I build accessible, pixel-perfect, and performant web experiences.",
+    "p1": "Informatics Engineering graduate with core competencies in modern web interface development using HTML, CSS, JavaScript, and frameworks such as React.js and Tailwind CSS.",
+    "p2": "Experienced in building responsive frontend features, implementing user interface designs, and collaborating in cross-functional product development through the Bangkit Academy 2024 program.",
+    "quote": "\"Quality is not an act, it is a habit.\"",
+    "download_cv": "Download CV"
+  },
+  "experience": {
+    "badge": "Work Experience",
+    "title": "Professional Journey",
+    "subtitle": "Professional experience and career milestones."
+  },
+  "education": {
+    "badge": "Education",
+    "title": "Academic Background",
+    "subtitle": "Academic background and learning journey."
+  },
+  "contact": {
+    "title": "Let's Connect",
+    "subtitle": "Have a project in mind? Let's turn your idea into reality.",
+    "get_in_touch": "Get in touch",
+    "desc": "I am always open to discussing new projects, creative ideas, or opportunities to be part of your vision.",
+    "form": {
+      "name": "Your Name",
+      "email": "Email Address",
+      "message": "Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success_title": "Message Sent!",
+      "success_desc": "Thank you for reaching out. I'll get back to you shortly."
+    },
+    "info": {
+      "email": "Email",
+      "location": "Location",
+      "phone": "Phone"
+    }
+  },
+  "data": {
+    "ewastepas_desc": "Electronic waste collection platform built with React and Tailwind CSS.",
+    "babygrowth_desc": "RESTful API backend for child growth monitoring using Node.js and GCP.",
+    "taskflow_desc": "Modern project management platform with real-time collaboration and analytics.",
+    "ecommerce_desc": "A comprehensive dashboard built with React 19 and Recharts.",
+    "social_desc": "Real-time social platform with WebSocket integration.",
+    "exp_gdc_role": "Curriculum Developer – Cloud Computing",
+    "exp_gdc_company": "Google Developer On Campus – Universitas Pasundan",
+    "exp_gdc_desc": "Developed practical learning materials related to Google Cloud Platform, API integration, and deployment workflows. Conducted internal workshops and mentoring sessions.",
+    "exp_bangkit_role": "Cloud Computing Cohort",
+    "exp_bangkit_company": "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
+    "exp_bangkit_desc": "Studied cloud architecture, REST API integration, and deployment using Google Cloud Platform. Developed a collaborative capstone project integrating Machine Learning, backend API, and Compute Engine.",
+    "exp_granesia_role": "Web Developer Intern",
+    "exp_granesia_company": "PT. Granesia Group Pikiran Rakyat",
+    "exp_granesia_desc": "Assisted in building the company's profile website using PHP, HTML, CSS, and JavaScript. Responsible for page structure, interface layout, and ensuring responsive design.",
+    "edu_unpas_school": "Universitas Pasundan",
+    "edu_unpas_degree": "Bachelor of Informatics Engineering",
+    "edu_unpas_desc": "Focus on web application development, user interface design, and responsive web design. Participating in the 2024 Bangkit Academy Cloud Computing Program.",
+    "edu_smk_school": "SMK Angkasa Husein Sastranegara Bandung",
+    "edu_smk_degree": "Software Engineering",
+    "edu_smk_desc": "Focus on web-based system development and application programming. Final Score: 85.8/100"
+  }
+}
