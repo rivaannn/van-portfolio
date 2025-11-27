@@ -4,19 +4,6 @@ import { cn } from "@/utils";
 
 /**
  * LazyImage Component - Optimized image loading with blur-up effect
- * Features:
- * - Lazy loading with Intersection Observer
- * - Blur-up placeholder effect
- * - Loading state management
- * - Error handling
- * - Responsive image support
- *
- * @param {Object} props
- * @param {string} props.src - Image source URL
- * @param {string} props.alt - Alt text for accessibility
- * @param {string} props.className - Additional CSS classes
- * @param {Function} props.onLoad - Callback when image loads
- * @param {Function} props.onError - Callback when image fails to load
  */
 const LazyImage = ({ src, alt, className = "", onLoad, onError, ...props }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,7 +14,7 @@ const LazyImage = ({ src, alt, className = "", onLoad, onError, ...props }) => {
   useEffect(() => {
     if (!imgRef.current) return;
 
-    // Intersection Observer for lazy loading
+    // Intersection Observer
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -68,12 +55,12 @@ const LazyImage = ({ src, alt, className = "", onLoad, onError, ...props }) => {
         className
       )}
     >
-      {/* Simple placeholder */}
+      {/* Placeholder */}
       {!isLoaded && !hasError && (
         <div className="absolute inset-0 bg-neutral-200 dark:bg-neutral-700" />
       )}
 
-      {/* Main Image */}
+      {/* Image */}
       {isInView && (
         <img
           src={src}
@@ -91,7 +78,7 @@ const LazyImage = ({ src, alt, className = "", onLoad, onError, ...props }) => {
         />
       )}
 
-      {/* Error State */}
+      {/* Error */}
       {hasError && (
         <div className="absolute inset-0 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800">
           <div className="text-center text-neutral-500 dark:text-neutral-400">

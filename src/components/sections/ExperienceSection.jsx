@@ -1,240 +1,160 @@
-import { memo } from "react";
+import { memo, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { motion as Motion } from "motion/react";
-import { Briefcase, Calendar } from "lucide-react";
-import { EXPERIENCE_DATA } from "@/data/portfolioData";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Briefcase, Calendar, Building2 } from "lucide-react";
+import { experienceData } from "@/data";
+import { ParallaxSection, Badge } from "@/components/ui";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ExperienceSection = memo(() => {
   const { t } = useTranslation();
+  const containerRef = useRef(null);
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.2,
-      },
-    },
-  };
+  useGSAP(
+    () => {
+      // Header Reveal
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".exp-header",
+          start: "top 80%",
+        },
+        defaults: { ease: "power4.out", duration: 1.2 }
+      });
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  };
+      // Animations
+      tl.fromTo(".exp-badge", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 });
+      tl.fromTo(".exp-title", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, "-=0.6");
+      tl.fromTo(".exp-subtitle", { y: 20, opacity: 0 }, { y: 0, opacity: 1 }, "-=0.8");
 
-  const headerVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  };
+      // Timeline Animation
+      const items = gsap.utils.toArray(".timeline-item");
+      items.forEach((item, i) => {
+        const content = item.querySelector(".timeline-content");
+        const node = item.querySelector(".timeline-node");
+        
+        const itemTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+          }
+        });
 
-  const lineVariants = {
-    hidden: { scaleY: 0 },
-    visible: {
-      scaleY: 1,
-      transition: {
-        duration: 1,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
+        // Node pop in
+        if (node) {
+           itemTl.fromTo(node, 
+             { scale: 0, opacity: 0 },
+             { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" }
+           );
+        }
+
+        // Content slide in
+        if (content) {
+          itemTl.fromTo(content,
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+            "-=0.4"
+          );
+        }
+      });
     },
-  };
+    { scope: containerRef }
+  );
 
   return (
-    <section
+    <ParallaxSection
       id="experience"
-      className="py-16 md:py-24 relative overflow-hidden bg-(--color-bg-primary)"
+      className="py-20 md:py-32 bg-(--color-bg-primary)"
+      floatingIcons={[
+        <Briefcase size={80} key="briefcase" />,
+        <Calendar size={70} key="calendar" />,
+        <Building2 size={75} key="building" />
+      ]}
+      orbColors={["from-indigo-500/10 to-blue-500/10", "from-cyan-500/10 to-teal-500/10"]}
     >
-      {/* Background Decorations */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Floating Icons */}
-        <Motion.div
-          animate={{
-            y: [0, -20, 0],
-            rotate: [0, 5, 0],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-32 left-1/4 opacity-5"
-        >
-          <Briefcase size={80} style={{ color: "var(--color-accent)" }} />
-        </Motion.div>
-        <Motion.div
-          animate={{
-            y: [0, 15, 0],
-            rotate: [0, -5, 0],
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-          className="absolute bottom-40 right-1/3 opacity-5"
-        >
-          <Calendar size={70} style={{ color: "var(--color-accent)" }} />
-        </Motion.div>
-
-        {/* Gradient Orbs - More Prominent */}
-        <Motion.div
-          animate={{
-            x: [0, 30, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.15, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-20 right-0 w-[400px] h-[400px] bg-linear-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
-        />
-        <Motion.div
-          animate={{
-            x: [0, -30, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-          className="absolute bottom-20 left-0 w-[350px] h-[350px] bg-linear-to-tr from-cyan-500/15 to-indigo-500/15 rounded-full blur-3xl"
-        />
-
-        {/* Accent Lines - Decorative */}
-        <div className="absolute top-40 left-20 w-40 h-0.5 bg-linear-to-r from-transparent via-(--color-accent) to-transparent opacity-30" />
-        <div className="absolute bottom-40 right-20 w-32 h-0.5 bg-linear-to-r from-transparent via-(--color-accent) to-transparent opacity-30" />
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
+      <div ref={containerRef} className="container mx-auto px-6 relative z-10">
         {/* Header */}
-        <Motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={headerVariants}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full text-sm font-medium bg-(--color-surface) border border-(--color-border) text-(--color-text-secondary) mb-6">
-            <span className="inline-flex rounded-full h-2.5 w-2.5 bg-(--color-accent)" />
+        <div className="exp-header text-center mb-16 space-y-6">
+          <Badge 
+            variant="outline" 
+            className="exp-badge gap-3 px-4 py-2 text-xs font-medium tracking-wide uppercase bg-(--color-surface) border-(--color-border) text-(--color-text-secondary) backdrop-blur-sm hover:bg-(--color-surface)"
+          >
+            <span className="inline-flex rounded-full h-2 w-2 bg-(--color-accent)" />
             {t("experience.badge")}
-          </div>
+          </Badge>
 
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-(--color-text-primary)">
+          <h2 className="exp-title text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-(--color-text-primary)">
             {t("experience.title")}
           </h2>
 
-          <p className="text-lg text-(--color-text-secondary) max-w-2xl mx-auto">
+          <p className="exp-subtitle text-lg md:text-xl max-w-2xl mx-auto text-(--color-text-secondary) font-light">
             {t("experience.subtitle")}
           </p>
-        </Motion.div>
+        </div>
 
         {/* Timeline */}
-        <div className="max-w-5xl mx-auto relative">
-          {/* Simple Timeline Line */}
-          <Motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={lineVariants}
-            className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-(--color-border) md:-translate-x-1/2 origin-top"
-          />
+        <div className="timeline-container relative max-w-4xl mx-auto">
+          {/* Vertical Line */}
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-(--color-border) -translate-x-1/2">
+             <div className="timeline-line absolute top-0 left-0 w-full h-full bg-gradient-to-b from-(--color-accent) via-(--color-accent) to-transparent origin-top" />
+          </div>
 
-          {/* Timeline Items */}
-          <Motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={containerVariants}
-            className="space-y-12"
-          >
-            {EXPERIENCE_DATA.map((exp, idx) => {
-              const isEven = idx % 2 === 0;
+          <div className="space-y-12">
+            {experienceData.map((exp, index) => (
+              <div
+                key={exp.id}
+                className={`timeline-item relative flex flex-col md:flex-row gap-8 ${
+                  index % 2 === 0 ? "md:flex-row-reverse" : ""
+                }`}
+              >
+                {/* Timeline Node */}
+                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-2 border-(--color-accent) bg-(--color-bg-primary) z-10 timeline-node">
+                  <div className="absolute inset-0 m-auto w-1.5 h-1.5 rounded-full bg-(--color-accent)" />
+                </div>
 
-              return (
-                <Motion.div
-                  key={exp.id}
-                  variants={itemVariants}
-                  className={`relative flex items-center ${
-                    isEven ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* Timeline Node */}
-                  <Motion.div
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{
-                      delay: idx * 0.1,
-                      duration: 0.4,
-                      ease: [0.25, 0.46, 0.45, 0.94],
-                    }}
-                    className="absolute left-8 md:left-1/2 w-5 h-5 rounded-full bg-(--color-accent) border-4 border-(--color-bg-primary) md:-translate-x-1/2 z-10"
-                  />
-
-                  {/* Spacer for desktop */}
-                  <div className="hidden md:block md:w-1/2" />
-
-                  {/* Content Card */}
-                  <div
-                    className={`w-full md:w-1/2 pl-20 md:pl-0 ${
-                      isEven ? "md:pl-8" : "md:pr-8"
+                {/* Content Card */}
+                <div className="ml-12 md:ml-0 md:w-1/2 timeline-content">
+                  <div className={`p-6 rounded-2xl bg-(--color-surface) border-2 border-(--color-border) shadow-md hover:shadow-xl hover:-translate-y-1 hover:border-(--color-accent) transition-all duration-300 group ${
+                     index % 2 === 0 ? "md:text-left" : "md:text-right"
+                  }`}>
+                    {/* Date Badge */}
+                    <Badge 
+                      variant="outline"
+                      className={`inline-flex items-center gap-2 px-3 py-1 text-xs font-medium mb-4 bg-(--color-surface) border-(--color-border) text-(--color-text-secondary) hover:bg-(--color-surface) ${
+                       index % 2 === 0 ? "mr-auto" : "ml-auto md:ml-auto md:mr-0"
                     }`}
-                  >
-                    <Motion.div
-                      className="group rounded-2xl p-6 md:p-8 bg-(--color-bg-secondary) border border-(--color-border) hover:border-(--color-accent) transition-all duration-300"
-                      style={{ willChange: "transform, opacity" }}
                     >
-                      {/* Period Badge */}
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-4 bg-(--color-accent) text-(--color-bg-primary)">
-                        <Calendar size={14} />
-                        <span>{exp.period}</span>
-                      </div>
+                      <Calendar size={12} />
+                      <span>{exp.period}</span>
+                    </Badge>
 
-                      {/* Role */}
-                      <h3 className="text-xl md:text-2xl font-bold mb-2 text-(--color-text-primary) group-hover:text-(--color-accent) transition-colors">
-                        {t(exp.role)}
-                      </h3>
+                    <h3 className="text-xl font-medium text-(--color-text-primary) mb-1 group-hover:text-(--color-accent) transition-colors">
+                      {t(exp.role)}
+                    </h3>
+                    
+                    <div className={`flex items-center gap-2 text-(--color-text-secondary) mb-4 ${
+                       index % 2 === 0 ? "justify-start" : "justify-start md:justify-end"
+                    }`}>
+                       <Briefcase size={16} />
+                       <span className="font-medium">{t(exp.company)}</span>
+                    </div>
 
-                      {/* Company */}
-                      <div className="flex items-center gap-2 text-base font-semibold mb-4 text-(--color-text-secondary)">
-                        <Briefcase size={18} />
-                        <span>{t(exp.company)}</span>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-base leading-relaxed text-(--color-text-secondary)">
-                        {t(exp.desc)}
-                      </p>
-                    </Motion.div>
+                    <p className="text-sm leading-relaxed text-(--color-text-secondary) font-light">
+                      {t(exp.desc)}
+                    </p>
                   </div>
-                </Motion.div>
-              );
-            })}
-          </Motion.div>
+                </div>
+
+                {/* Empty Space for Grid alignment */}
+                <div className="hidden md:block md:w-1/2" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </section>
+    </ParallaxSection>
   );
 });
 

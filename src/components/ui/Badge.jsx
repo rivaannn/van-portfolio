@@ -3,29 +3,24 @@ import { cva } from "class-variance-authority";
 import PropTypes from "prop-types";
 import { cn } from "@/utils";
 
-/**
- * Badge Component Variants (Shadcn UI v2 Style)
- * Elegant badges for tags, status, and labels
- */
-
 const badgeVariants = cva(
   "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {
     variants: {
       variant: {
         default:
-          "border-transparent bg-neutral-900 text-neutral-50 hover:bg-neutral-900/80 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/80",
+          "border-transparent bg-(--color-accent) text-(--color-bg-primary) hover:opacity-90",
         secondary:
-          "border-transparent bg-neutral-100 text-neutral-900 hover:bg-neutral-100/80 dark:bg-neutral-800 dark:text-neutral-50 dark:hover:bg-neutral-800/80",
+          "border-transparent bg-(--color-bg-secondary) text-(--color-text-primary) hover:bg-(--color-bg-tertiary)",
         success:
-          "border-transparent bg-emerald-500 text-white hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-700",
+          "border-transparent bg-emerald-500 text-white hover:bg-emerald-600",
         warning:
-          "border-transparent bg-amber-500 text-white hover:bg-amber-600 dark:bg-amber-600 dark:hover:bg-amber-700",
+          "border-transparent bg-amber-500 text-white hover:bg-amber-600",
         danger:
-          "border-transparent bg-red-500 text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700",
-        info: "border-transparent bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700",
+          "border-transparent bg-red-500 text-white hover:bg-red-600",
+        info: "border-transparent bg-blue-500 text-white hover:bg-blue-600",
         outline:
-          "border-neutral-200 text-neutral-900 hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-50 dark:hover:bg-neutral-800",
+          "border-(--color-border) text-(--color-text-secondary) hover:bg-(--color-surface)",
         gradient:
           "border-0 bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600",
       },

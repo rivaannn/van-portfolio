@@ -1,5 +1,5 @@
 import { Github, Linkedin, Mail } from "lucide-react";
-import { CONTACT } from "@/data/portfolioData";
+import { contactData } from "@/data";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,17 +8,17 @@ const Footer = () => {
     {
       name: "GitHub",
       icon: <Github size={18} />,
-      url: CONTACT.github,
+      url: contactData.github,
     },
     {
       name: "LinkedIn",
       icon: <Linkedin size={18} />,
-      url: CONTACT.linkedin,
+      url: contactData.linkedin,
     },
     {
       name: "Email",
       icon: <Mail size={18} />,
-      url: `mailto:${CONTACT.email}`,
+      url: `mailto:${contactData.email}`,
     },
   ];
 

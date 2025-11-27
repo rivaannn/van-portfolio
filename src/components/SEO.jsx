@@ -1,22 +1,22 @@
 import { useEffect } from "react";
 import PropTypes from "prop-types";
-import { SEO_DEFAULTS } from "@/data/portfolioData";
+import { seoDefaults } from "@/data";
 
 const SEO = ({
-  title = SEO_DEFAULTS.SITE_TITLE,
-  description = SEO_DEFAULTS.SITE_DESCRIPTION,
-  keywords = SEO_DEFAULTS.SITE_KEYWORDS,
-  author = SEO_DEFAULTS.SITE_AUTHOR,
-  image = SEO_DEFAULTS.SITE_IMAGE,
-  url = SEO_DEFAULTS.SITE_URL,
+  title = seoDefaults.SITE_TITLE,
+  description = seoDefaults.SITE_DESCRIPTION,
+  keywords = seoDefaults.SITE_KEYWORDS,
+  author = seoDefaults.SITE_AUTHOR,
+  image = seoDefaults.SITE_IMAGE,
+  url = seoDefaults.SITE_URL,
   type = "website",
   schema = null,
 }) => {
   useEffect(() => {
     // Construct full title with site name if not already included
-    const siteTitle = title.includes(SEO_DEFAULTS.SITE_AUTHOR)
+    const siteTitle = title.includes(seoDefaults.SITE_AUTHOR)
       ? title
-      : `${title} | ${SEO_DEFAULTS.SITE_AUTHOR}`;
+      : `${title} | ${seoDefaults.SITE_AUTHOR}`;
 
     // Base JSON-LD Schema - Person/Portfolio
     const personSchema = {
@@ -39,8 +39,8 @@ const SEO = ({
     const websiteSchema = {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      name: SEO_DEFAULTS.SITE_NAME,
-      url: SEO_DEFAULTS.SITE_URL,
+      name: seoDefaults.SITE_NAME,
+      url: seoDefaults.SITE_URL,
       description: description,
       author: {
         "@type": "Person",
@@ -84,16 +84,16 @@ const SEO = ({
     setMetaTag("og:image", image, true);
     setMetaTag("og:image:width", "1200", true);
     setMetaTag("og:image:height", "630", true);
-    setMetaTag("og:site_name", SEO_DEFAULTS.SITE_NAME, true);
+    setMetaTag("og:site_name", seoDefaults.SITE_NAME, true);
     setMetaTag("og:locale", "en_US", true);
 
     // Additional meta tags
-    setMetaTag("theme-color", SEO_DEFAULTS.THEME_COLOR);
-    setMetaTag("msapplication-TileColor", SEO_DEFAULTS.THEME_COLOR);
+    setMetaTag("theme-color", seoDefaults.THEME_COLOR);
+    setMetaTag("msapplication-TileColor", seoDefaults.THEME_COLOR);
     setMetaTag("mobile-web-app-capable", "yes");
     setMetaTag("apple-mobile-web-app-capable", "yes");
     setMetaTag("apple-mobile-web-app-status-bar-style", "default");
-    setMetaTag("apple-mobile-web-app-title", SEO_DEFAULTS.SITE_NAME);
+    setMetaTag("apple-mobile-web-app-title", seoDefaults.SITE_NAME);
 
     // Set canonical link
     let canonical = document.querySelector('link[rel="canonical"]');

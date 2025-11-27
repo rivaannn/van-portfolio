@@ -5,9 +5,7 @@ import { ExternalLink, Github } from "lucide-react";
 import { cn } from "@/utils";
 
 /**
- * Card Component Variants (Shadcn UI v2 Style)
- * Clean, minimal, and highly customizable card component
- * Includes ProjectCard as a variant
+ * Card Component Variants
  */
 
 const cardVariants = cva(
@@ -24,7 +22,7 @@ const cardVariants = cva(
         glass:
           "border-neutral-200/50 dark:border-neutral-700/50 bg-white/80 dark:bg-neutral-900/80",
         project:
-          "border-(--color-border) bg-(--color-bg-secondary) hover:border-(--color-accent) rounded-2xl overflow-hidden",
+          "border-2 border-(--color-border) bg-(--color-surface) shadow-md hover:shadow-xl hover:-translate-y-1 hover:border-(--color-accent) rounded-2xl transition-all duration-300",
       },
       padding: {
         none: "",
@@ -106,8 +104,6 @@ CardFooter.displayName = "CardFooter";
 
 /**
  * ProjectCard Component
- * Specialized card for displaying project information
- * Now integrated as a Card variant
  */
 const ProjectCard = React.memo(({ project, index, t, className, ...props }) => {
   return (
@@ -126,7 +122,7 @@ const ProjectCard = React.memo(({ project, index, t, className, ...props }) => {
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
 
-          {/* Overlay on Hover */}
+          {/* Overlay */}
           <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
             <a
               href={project.link}

@@ -1,332 +1,151 @@
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Download, MapPin, Mail, Code2, Sparkles } from "lucide-react";
-import { motion as Motion } from "motion/react";
+import { Download, MapPin, Mail, Code2, Sparkles, Heart } from "lucide-react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProfilePhoto from "@/components/ui/ProfilePhoto";
+import { ParallaxSection, Badge, Button } from "@/components/ui";
 import { useLanguage } from "@/hooks";
-import { CONTACT } from "@/data/portfolioData";
+import { contactData } from "@/data";
 import vanPhoto from "@/assets/images/van.jpg";
 import cvEng from "@/assets/cv/cv-english.pdf";
 import cvIndo from "@/assets/cv/cv-indonesia.pdf";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const AboutHero = () => {
   const { t } = useTranslation();
   const { isIndonesian } = useLanguage();
+  const containerRef = useRef(null);
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
+  useGSAP(
+    () => {
+      // Content Animation
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".about-content",
+          start: "top 80%",
+        },
+        defaults: { ease: "power4.out", duration: 1.2 }
+      });
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  };
+      // Animations
+      tl.fromTo(".about-badge", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 });
+      tl.fromTo(".about-title-line", { y: 100, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.1 }, "-=0.6");
+      tl.fromTo(".about-text", { y: 30, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.1 }, "-=0.8");
 
-  const photoVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
+      // Photo Animation
+      gsap.fromTo(
+        ".about-photo-container",
+        { y: 50, opacity: 0, scale: 0.95 },
+        {
+          scrollTrigger: {
+            trigger: ".about-photo-container",
+            start: "top 80%",
+          },
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1.5,
+          ease: "power3.out",
+        }
+      );
     },
-  };
+    { scope: containerRef }
+  );
 
   return (
-    <section
+    <ParallaxSection
       id="about"
-      className="relative py-16 md:py-24 overflow-hidden bg-(--color-bg-primary)"
+      className="py-20 md:py-32 bg-(--color-bg-primary)"
+      floatingIcons={[
+        <Code2 size={60} key="code" />,
+        <Sparkles size={50} key="sparkles" />,
+        <Heart size={55} key="heart" />
+      ]}
+      orbColors={["from-blue-500/10 to-purple-500/10", "from-cyan-500/10 to-teal-500/10"]}
     >
-      {/* Animated Background Decorations */}
-      <Motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        style={{
-          background:
-            "radial-gradient(circle, var(--color-accent) 0%, transparent 70%)",
-        }}
-        className="absolute top-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-20"
-      />
-
-      <Motion.div
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-        style={{
-          background:
-            "radial-gradient(circle, var(--color-accent) 0%, transparent 60%)",
-        }}
-        className="absolute bottom-20 left-10 w-80 h-80 rounded-full blur-3xl opacity-10"
-      />
-
-      {/* Floating Icons */}
-      <Motion.div
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 5, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-32 left-[10%] opacity-10"
-      >
-        <Code2 size={40} className="text-(--color-accent)" />
-      </Motion.div>
-
-      <Motion.div
-        animate={{
-          y: [0, 20, 0],
-          rotate: [0, -5, 0],
-        }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-        className="absolute bottom-32 right-[15%] opacity-10"
-      >
-        <Sparkles size={35} className="text-(--color-accent)" />
-      </Motion.div>
-
-      {/* Grid Pattern Overlay */}
-      <div
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: `linear-gradient(var(--color-border) 1px, transparent 1px),
-                           linear-gradient(90deg, var(--color-border) 1px, transparent 1px)`,
-          backgroundSize: "50px 50px",
-        }}
-      />
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+      <div ref={containerRef} className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center max-w-7xl mx-auto">
           {/* Left: Text Content */}
-          <Motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            className="space-y-6"
-          >
-            <Motion.div
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full text-sm font-medium bg-(--color-surface) border border-(--color-border) text-(--color-text-secondary)"
+          <div className="about-content space-y-8">
+            <Badge 
+              variant="outline" 
+              className="about-badge gap-3 px-4 py-2 text-xs font-medium tracking-wide uppercase bg-(--color-surface) border-(--color-border) text-(--color-text-secondary) backdrop-blur-sm hover:bg-(--color-surface)"
             >
-              <Motion.span
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="inline-flex rounded-full h-2.5 w-2.5 bg-(--color-accent)"
-              />
+              <span className="inline-flex rounded-full h-2 w-2 bg-(--color-accent)" />
               {t("about.badge")}
-            </Motion.div>
+            </Badge>
 
             {/* Title */}
-            <Motion.h1
-              variants={itemVariants}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-(--color-text-primary)"
-            >
-              {t("about.title")}
-            </Motion.h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight text-(--color-text-primary) tracking-tight">
+              <div className="overflow-hidden">
+                <span className="about-title-line block">{t("about.title")}</span>
+              </div>
+            </h1>
 
             {/* Subtitle */}
-            <Motion.p
-              variants={itemVariants}
-              className="text-xl text-(--color-text-secondary)"
-            >
-              {t("about.subtitle")}
-            </Motion.p>
+            <div className="overflow-hidden">
+              <p className="about-title-line text-xl md:text-2xl text-(--color-text-secondary) font-light">
+                {t("about.subtitle")}
+              </p>
+            </div>
 
             {/* Description */}
-            <Motion.div
-              variants={itemVariants}
-              className="space-y-4 leading-relaxed text-(--color-text-secondary)"
-            >
-              <Motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
-              >
-                {t("about.p1")}
-              </Motion.p>
-              <Motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-              >
-                {t("about.p2")}
-              </Motion.p>
-            </Motion.div>
+            <div className="space-y-6 text-lg leading-relaxed text-(--color-text-secondary) font-light text-justify">
+              <p className="about-text">{t("about.p1")}</p>
+              <p className="about-text">{t("about.p2")}</p>
+            </div>
 
             {/* Quote */}
-            <Motion.blockquote
-              variants={itemVariants}
-              whileHover={{ x: 5 }}
-              className="pl-4 italic border-l-4 border-(--color-accent) text-(--color-text-secondary)"
-            >
-              {t("about.quote")}
-            </Motion.blockquote>
+            <div className="about-text">
+              <blockquote className="pl-6 border-l-2 border-(--color-accent) text-(--color-text-primary) italic text-lg opacity-80">
+                {t("about.quote")}
+              </blockquote>
+            </div>
 
-            {/* Contact Info */}
-            <Motion.div
-              variants={itemVariants}
-              className="flex flex-wrap gap-6 pt-4"
-            >
-              <Motion.div
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-2 text-sm text-(--color-text-secondary)"
+            {/* Contact Info & Download */}
+            <div className="about-text flex flex-col sm:flex-row gap-6 pt-4">
+              <Button
+                asChild
+                size="lg"
+                className="group rounded-full font-medium"
               >
-                <MapPin size={16} className="text-(--color-text-primary)" />
-                <span>{CONTACT.location}</span>
-              </Motion.div>
-              <Motion.div
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-2 text-sm text-(--color-text-secondary)"
-              >
-                <Mail size={16} className="text-(--color-text-primary)" />
                 <a
-                  href={`mailto:${CONTACT.email}`}
-                  className="hover:text-(--color-accent) transition-colors"
+                  href={isIndonesian ? cvIndo : cvEng}
+                  download={`CV_M_Rivan_Sahronie_${isIndonesian ? "ID" : "EN"}.pdf`}
+                  className="flex items-center gap-3"
                 >
-                  {CONTACT.email}
+                  <Download size={20} />
+                  {t("about.download_cv")}
                 </a>
-              </Motion.div>
-            </Motion.div>
+              </Button>
+              
+              <div className="flex flex-col justify-center gap-2 text-sm text-(--color-text-secondary)">
+                 <div className="flex items-center gap-2">
+                    <MapPin size={16} />
+                    <span>{contactData.location}</span>
+                 </div>
+                 <div className="flex items-center gap-2">
+                    <Mail size={16} />
+                    <a href={`mailto:${contactData.email}`} className="hover:text-(--color-text-primary) transition-colors">
+                      {contactData.email}
+                    </a>
+                 </div>
+              </div>
+            </div>
+          </div>
 
-            {/* Download CV Button */}
-            <Motion.a
-              variants={itemVariants}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              href={isIndonesian ? cvIndo : cvEng}
-              download={`CV_M_Rivan_Sahronie_${isIndonesian ? "ID" : "EN"}.pdf`}
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-medium transition-all bg-(--color-accent) text-(--color-bg-primary) shadow-(--shadow-lg) hover:shadow-(--shadow-xl)"
-            >
-              <Motion.div
-                animate={{ y: [0, -3, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <Download size={20} />
-              </Motion.div>
-              {t("about.download_cv")}
-            </Motion.a>
-          </Motion.div>
-
-          {/* Right: Photo with decorative elements */}
-          <Motion.div
-            variants={photoVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="relative"
-          >
-            {/* Decorative rings around photo */}
-            <Motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute -inset-4 rounded-full opacity-20"
-              style={{
-                background:
-                  "conic-gradient(from 0deg, transparent, var(--color-accent), transparent)",
-              }}
-            />
-
-            <Motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              className="absolute -inset-8 rounded-full opacity-10"
-            >
-              <div
-                className="w-full h-full rounded-full"
-                style={{
-                  background:
-                    "conic-gradient(from 90deg, transparent, var(--color-accent), transparent)",
-                }}
-              />
-            </Motion.div>
-
-            {/* Floating dots around photo */}
-            {[0, 1, 2, 3].map((i) => (
-              <Motion.div
-                key={i}
-                animate={{
-                  y: [0, -15, 0],
-                  opacity: [0.3, 0.6, 0.3],
-                }}
-                transition={{
-                  duration: 3 + i,
-                  repeat: Infinity,
-                  delay: i * 0.5,
-                }}
-                className="absolute w-3 h-3 bg-(--color-accent) rounded-full"
-                style={{
-                  top: `${20 + i * 20}%`,
-                  right: i % 2 === 0 ? "-10%" : "auto",
-                  left: i % 2 === 1 ? "-10%" : "auto",
-                }}
-              />
-            ))}
-
-            {/* Photo with hover effect */}
-            <Motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
+          {/* Right: Photo */}
+          <div className="about-photo-container relative lg:pl-10">
+            <div className="relative z-10">
               <ProfilePhoto src={vanPhoto} alt="M Rivan Sahronie" />
-            </Motion.div>
-
-            {/* Glow effect behind photo */}
-            <Motion.div
-              animate={{
-                opacity: [0.3, 0.6, 0.3],
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute inset-0 bg-(--color-accent) rounded-full blur-3xl opacity-20 -z-10"
-            />
-          </Motion.div>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+    </ParallaxSection>
   );
 };
 

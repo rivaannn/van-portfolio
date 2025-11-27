@@ -1,19 +1,25 @@
-import { memo } from "react";
+import { memo, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { motion as Motion } from "motion/react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Cpu, Database, Layout } from "lucide-react";
 import { useTheme } from "@/hooks";
-import { SKILL_CATEGORIES } from "@/data/portfolioData";
-import { containerVariants, itemVariants, headerVariants } from "@/utils";
+import { skillCategories } from "@/data";
+import { ParallaxSection, Badge } from "@/components/ui";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const SkillSection = memo(() => {
   const { t } = useTranslation();
   const { isDark } = useTheme();
+  const containerRef = useRef(null);
 
   // Combine all skills from all categories
   const allSkills = [
-    ...SKILL_CATEGORIES.frontend.skills,
-    ...SKILL_CATEGORIES.backend.skills,
-    ...SKILL_CATEGORIES.tools.skills,
+    ...skillCategories.frontend.skills,
+    ...skillCategories.backend.skills,
+    ...skillCategories.tools.skills,
   ];
 
   // Function to check if logo needs inversion for dark mode
@@ -22,184 +28,109 @@ const SkillSection = memo(() => {
     return darkLogos.includes(skillName) && isDark;
   };
 
+  useGSAP(
+    () => {
+      // Header Reveal
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".skill-header",
+          start: "top 80%",
+        },
+        defaults: { ease: "power4.out", duration: 1.2 }
+      });
+
+      // Animations
+      tl.fromTo(".skill-badge", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 });
+      tl.fromTo(".skill-title", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, "-=0.6");
+      tl.fromTo(".skill-subtitle", { y: 20, opacity: 0 }, { y: 0, opacity: 1 }, "-=0.8");
+
+      // Grid Animation
+      gsap.fromTo(
+        ".skill-item",
+        { y: 30, opacity: 0, scale: 0.9 },
+        {
+          scrollTrigger: {
+            trigger: ".skill-grid",
+            start: "top 85%",
+          },
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.05,
+          ease: "power2.out",
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section
+    <ParallaxSection
       id="skills"
-      className="py-16 md:py-24 relative overflow-hidden bg-(--color-bg-primary)"
+      className="py-20 md:py-32 bg-(--color-bg-primary)"
+      floatingIcons={[
+        <Cpu size={80} key="cpu" />,
+        <Database size={70} key="db" />,
+        <Layout size={75} key="layout" />
+      ]}
+      orbColors={["from-orange-500/10 to-red-500/10", "from-yellow-500/10 to-amber-500/10"]}
     >
-      {/* Background Decorations */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Animated Gradient Orbs */}
-        <Motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-20 -left-20 w-96 h-96 bg-linear-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
-        />
-        <Motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 80, 0],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute bottom-20 -right-20 w-[500px] h-[500px] bg-linear-to-tl from-cyan-500/20 to-indigo-500/20 rounded-full blur-3xl"
-        />
-
-        {/* Animated Grid Pattern */}
-        <Motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `linear-gradient(var(--color-border) 1px, transparent 1px),
-                              linear-gradient(90deg, var(--color-border) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-            opacity: 0.3,
-          }}
-        />
-
-        {/* Floating Code Symbols */}
-        <Motion.div
-          animate={{
-            y: [0, -20, 0],
-            rotate: [0, 5, 0],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-32 left-1/4 text-6xl opacity-5"
-          style={{ color: "var(--color-accent)" }}
-        >
-          {"</>"}
-        </Motion.div>
-        <Motion.div
-          animate={{
-            y: [0, 15, 0],
-            rotate: [0, -5, 0],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-          className="absolute bottom-40 right-1/4 text-7xl opacity-5"
-          style={{ color: "var(--color-accent)" }}
-        >
-          {"{}"}
-        </Motion.div>
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
+      <div ref={containerRef} className="container mx-auto px-6 relative z-10">
         {/* Header */}
-        <Motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={headerVariants}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full text-sm font-medium bg-(--color-surface) border border-(--color-border) text-(--color-text-secondary) mb-6">
-            <span className="inline-flex rounded-full h-2.5 w-2.5 bg-(--color-accent)" />
-            {t("skills.badge")}
-          </div>
-
-          <h2
-            style={{ color: "var(--color-text-primary)" }}
-            className="text-4xl md:text-6xl font-bold mb-6"
+        <div className="skill-header text-center mb-16 space-y-6">
+          <Badge 
+            variant="outline" 
+            className="skill-badge gap-3 px-4 py-2 text-xs font-medium tracking-wide uppercase bg-(--color-surface) border-(--color-border) text-(--color-text-secondary) backdrop-blur-sm hover:bg-(--color-surface)"
           >
+            <span className="inline-flex rounded-full h-2 w-2 bg-(--color-accent)" />
+            {t("skills.badge")}
+          </Badge>
+
+          <h2 className="skill-title text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-(--color-text-primary)">
             Tech Stack
           </h2>
 
-          <p
-            style={{ color: "var(--color-text-secondary)" }}
-            className="text-lg max-w-2xl mx-auto"
-          >
+          <p className="skill-subtitle text-lg md:text-xl max-w-2xl mx-auto text-(--color-text-secondary) font-light">
             {t("skills.subtitle")}
           </p>
-        </Motion.div>
+        </div>
 
-        {/* Skills Grid - Animated */}
-        <Motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
-          className="max-w-5xl mx-auto"
-        >
+        {/* Skills Grid */}
+        <div className="skill-grid max-w-5xl mx-auto">
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6">
             {allSkills.map((skill) => (
-              <Motion.div
+              <div
                 key={skill.name}
-                variants={itemVariants}
-                className="group"
+                className="skill-item group"
               >
-                <Motion.div
-                  whileHover={{
-                    y: -8,
-                    scale: 1.05,
-                    transition: { duration: 0.2 },
-                  }}
-                  style={{
-                    backgroundColor: "var(--color-bg-secondary)",
-                    border: "1px solid var(--color-border)",
-                  }}
-                  className="flex flex-col items-center gap-3 p-5 rounded-xl transition-all duration-300 hover:border-(--color-accent) hover:shadow-lg relative overflow-hidden"
+                <div
+                  className="flex flex-col items-center gap-4 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:border-(--color-accent) bg-(--color-surface) border-2 border-(--color-border) shadow-sm hover:shadow-md relative overflow-hidden"
                 >
                   {/* Hover Glow Effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div
-                      className="absolute inset-0 blur-xl"
-                      style={{
-                        background:
-                          "radial-gradient(circle at center, var(--color-accent) 0%, transparent 70%)",
-                        opacity: 0.15,
-                      }}
-                    />
-                  </div>
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-(--color-surface) to-transparent pointer-events-none" />
 
                   {/* Icon */}
-                  <Motion.div
-                    whileHover={{ rotate: [0, -10, 10, 0] }}
-                    transition={{ duration: 0.5 }}
-                    className="relative z-10"
+                  <div
+                    className="relative z-10 w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
                     style={{
                       filter: needsInversion(skill.name) ? "invert(1)" : "none",
                     }}
                   >
                     {skill.icon}
-                  </Motion.div>
+                  </div>
 
                   {/* Name */}
-                  <span
-                    style={{ color: "var(--color-text-secondary)" }}
-                    className="text-xs font-medium text-center leading-tight relative z-10 group-hover:text-(--color-accent) transition-colors duration-300"
-                  >
+                  <span className="text-xs font-medium text-center leading-tight relative z-10 text-(--color-text-secondary) group-hover:text-(--color-text-primary) transition-colors duration-300">
                     {skill.name}
                   </span>
-                </Motion.div>
-              </Motion.div>
+                </div>
+              </div>
             ))}
           </div>
-        </Motion.div>
+        </div>
       </div>
-    </section>
+    </ParallaxSection>
   );
 });
 

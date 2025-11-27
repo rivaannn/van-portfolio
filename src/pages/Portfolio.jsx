@@ -2,7 +2,7 @@ import { lazy, Suspense, useState } from "react";
 import { SEO, PageLoader, SectionSkeleton } from "@/components";
 import MainLayout from "@/layouts/MainLayout";
 
-// Lazy load sections for better performance
+// Lazy load sections
 const HeroSection = lazy(() => import("@/components/sections/HeroSection"));
 const AboutHero = lazy(() => import("@/components/sections/AboutHero"));
 const SkillSection = lazy(() => import("@/components/sections/SkillSection"));
@@ -32,37 +32,37 @@ const Portfolio = () => {
       <MainLayout>
         <SEO />
         <div className="relative w-full overflow-hidden">
-          {/* Hero Section */}
+          {/* Hero */}
           <Suspense fallback={<SectionSkeleton />}>
             <HeroSection />
           </Suspense>
 
-          {/* About Section */}
+          {/* About */}
           <Suspense fallback={<SectionSkeleton />}>
             <AboutHero />
           </Suspense>
 
-          {/* Skills Section */}
+          {/* Skills */}
           <Suspense fallback={<SectionSkeleton />}>
             <SkillSection />
           </Suspense>
 
-          {/* Experience Section */}
+          {/* Experience */}
           <Suspense fallback={<SectionSkeleton />}>
             <ExperienceSection />
           </Suspense>
 
-          {/* Education Section */}
+          {/* Education */}
           <Suspense fallback={<SectionSkeleton />}>
             <EducationSection />
           </Suspense>
 
-          {/* Projects Section */}
+          {/* Projects */}
           <Suspense fallback={<SectionSkeleton />}>
             <ProjectsSection />
           </Suspense>
 
-          {/* Contact Section */}
+          {/* Contact */}
           <Suspense fallback={<SectionSkeleton />}>
             <ContactSection />
           </Suspense>

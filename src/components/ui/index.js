@@ -1,5 +1,4 @@
 // UI Components Barrel Export
-export { default as AnimatedBackground } from "./AnimatedBackground";
 export { default as Badge } from "./Badge";
 export { default as Button } from "./Button";
 export {
@@ -15,7 +14,7 @@ export { default as LazyImage } from "./LazyImage";
 export { default as PageLoader } from "./PageLoader";
 export { default as ProfilePhoto } from "./ProfilePhoto";
 export { default as ScrollToTop } from "./ScrollToTop";
-export { default as SectionBackground } from "./SectionBackground";
 export { default as SectionSkeleton } from "./SectionSkeleton";
+export { default as ParallaxSection } from "./ParallaxSection";
 export { default as TechIcon } from "./TechIcon";
 export { default as ThemeToggle } from "./ThemeToggle";

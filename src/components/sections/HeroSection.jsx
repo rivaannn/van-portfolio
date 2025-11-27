@@ -1,156 +1,176 @@
-import { ArrowRight } from "lucide-react";
+import { useRef } from "react";
+import { ArrowRight, Code2, Sparkles, Zap, Database, Globe, Cpu, Mouse } from "lucide-react";
 import { useTranslation, Trans } from "react-i18next";
-import { motion as Motion } from "motion/react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ParallaxSection, Badge, Button } from "@/components/ui";
+import { useNavigationStore } from "@/store";
 
 const HeroSection = () => {
   const { t } = useTranslation();
+  const containerRef = useRef(null);
+  const { setActiveSection } = useNavigationStore();
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  };
+      // Animations
+      tl.fromTo(".hero-badge", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.2 });
+      tl.fromTo(".hero-title-line", { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, stagger: 0.15 }, "-=0.8");
+      tl.fromTo(".hero-subtitle", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, "-=0.8");
+      tl.fromTo(".hero-buttons", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, "-=0.8");
 
-  const titleContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3,
-      },
-    },
-  };
+      // Background Orbit Animation
+      gsap.to(".orbit-system", {
+        rotation: 360,
+        duration: 40,
+        repeat: -1,
+        ease: "linear",
+      });
 
-  const wordVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
+      gsap.to(".orbit-icon-inner", {
+        rotation: -360,
+        duration: 40,
+        repeat: -1,
+        ease: "linear",
+      });
+
+      // Scroll Indicator
+      gsap.fromTo(
+        ".scroll-indicator",
+        { y: -20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, delay: 2 }
+      );
+
+      // Mouse Wheel Animation
+      gsap.fromTo(
+        ".mouse-wheel",
+        { y: 0, opacity: 1 },
+        {
+          y: 10,
+          opacity: 0,
+          duration: 1.5,
+          repeat: -1,
+          ease: "power1.inOut",
+        }
+      );
     },
-  };
+    { scope: containerRef }
+  );
 
   return (
-    <section
+    <ParallaxSection
       id="home"
-      className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden pt-20 md:pt-0"
+      className="min-h-screen relative overflow-hidden bg-(--color-bg-primary)"
+      floatingIcons={[
+        <Code2 size={40} key="code" />,
+        <Sparkles size={30} key="sparkles" />,
+        <Zap size={35} key="zap" />
+      ]}
+      orbColors={["from-blue-500/10 to-purple-500/10", "from-cyan-500/10 to-teal-500/10"]}
     >
-      {/* Content */}
-      <Motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="max-w-5xl mx-auto flex flex-col items-center gap-8 md:gap-10"
-      >
-        {/* Status Badge */}
-        <Motion.div
-          variants={itemVariants}
-          whileHover={{ scale: 1.05 }}
-          className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full text-sm font-medium bg-(--color-surface) border border-(--color-border) text-(--color-text-secondary)"
-        >
-          <Motion.span
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="inline-flex rounded-full h-2.5 w-2.5 bg-(--color-accent)"
-          />
-          {t("hero.available")}
-        </Motion.div>
+      <div ref={containerRef} className="container mx-auto px-6 relative flex flex-col items-center justify-center min-h-screen pb-12">
+        
+        {/* Background Orbit Visual */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] pointer-events-none z-0 opacity-40">
+           <div className="orbit-system w-full h-full relative flex items-center justify-center">
+              {/* Rings */}
+              <div className="absolute w-[60%] h-[60%] border border-(--color-border) rounded-full opacity-30" />
+              <div className="absolute w-[85%] h-[85%] border border-(--color-border) rounded-full opacity-20" />
+              
+              {/* Orbiting Icons */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-6 w-12 h-12 flex items-center justify-center orbit-icon-inner text-(--color-text-tertiary)">
+                 <Database size={24} />
+              </div>
+              <div className="absolute bottom-[15%] right-[15%] w-12 h-12 flex items-center justify-center orbit-icon-inner text-(--color-text-tertiary)">
+                 <Globe size={24} />
+              </div>
+              <div className="absolute bottom-[15%] left-[15%] w-12 h-12 flex items-center justify-center orbit-icon-inner text-(--color-text-tertiary)">
+                 <Cpu size={24} />
+              </div>
+           </div>
+        </div>
 
-        {/* Main Title with Word Animation */}
-        <Motion.h1
-          variants={titleContainerVariants}
-          initial="hidden"
-          animate="visible"
-          className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.1] md:leading-[1.1] max-w-4xl text-(--color-text-primary)"
-        >
-          <Motion.span variants={wordVariants} className="inline-block mr-3">
-            {t("hero.title_1")}
-          </Motion.span>
-          <Motion.span
-            variants={wordVariants}
-            className="inline-block mr-3 italic text-(--color-text-tertiary)"
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto">
+          {/* Status Badge */}
+          <Badge 
+            variant="outline" 
+            className="hero-badge gap-3 px-4 py-2 text-xs font-medium tracking-wide uppercase bg-(--color-surface) border-(--color-border) text-(--color-text-secondary) backdrop-blur-sm mb-8 hover:bg-(--color-surface)"
           >
-            {t("hero.title_highlight")}
-          </Motion.span>
-          <Motion.span variants={wordVariants} className="inline-block">
-            {t("hero.title_2")}
-          </Motion.span>
-        </Motion.h1>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            {t("hero.available")}
+          </Badge>
 
-        {/* Subtitle */}
-        <Motion.p
-          variants={itemVariants}
-          className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light text-(--color-text-secondary)"
-        >
-          <Trans
-            i18nKey="hero.intro"
-            components={{
-              1: <span className="font-semibold text-(--color-text-primary)" />,
-            }}
-          />
-        </Motion.p>
+          {/* Main Title */}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tighter leading-[1.1] text-(--color-text-primary) mb-8">
+            <div className="overflow-hidden pb-2">
+              <span className="hero-title-line block">
+                {t("hero.title_1")}
+              </span>
+            </div>
+            <div className="overflow-hidden pb-2">
+              <span className="hero-title-line block">
+                <span className="italic font-normal text-(--color-accent)">{t("hero.title_highlight")}</span> {t("hero.title_2")}
+              </span>
+            </div>
+          </h1>
 
-        {/* Buttons */}
-        <Motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center justify-center gap-5 pt-4 w-full sm:w-auto"
-        >
-          <a href="#about" className="w-full sm:w-auto">
-            <Motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-full font-medium text-lg transition-all duration-200 bg-(--color-accent) text-(--color-bg-primary)"
+          {/* Subtitle */}
+          <div className="overflow-hidden mb-10 max-w-2xl">
+            <p className="hero-subtitle text-lg md:text-xl leading-relaxed font-light text-(--color-text-secondary)">
+              <Trans
+                i18nKey="hero.intro"
+                components={{
+                  1: <span className="font-medium text-(--color-text-primary)" />,
+                }}
+              />
+            </p>
+          </div>
+
+          {/* Buttons */}
+          <div className="hero-buttons flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
+            <Button
+              onClick={() => {
+                const element = document.getElementById("about");
+                if (element) {
+                  const lenis = window.lenis;
+                  if (lenis) {
+                    lenis.scrollTo(element, {
+                      offset: -100,
+                      duration: 1.5,
+                      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    });
+                  } else {
+                    element.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                  setActiveSection("about");
+                }
+              }}
+              className="w-full sm:w-auto group gap-3 text-lg border-none"
+              size="lg"
             >
               {t("hero.view_work")}
-              <Motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <ArrowRight size={18} />
-              </Motion.div>
-            </Motion.button>
-          </a>
-        </Motion.div>
-      </Motion.div>
+              <ArrowRight
+                size={18}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </Button>
+          </div>
+        </div>
+      </div>
 
       {/* Scroll Indicator */}
-      <Motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.6 }}
-        style={{
-          background: `linear-gradient(to bottom, transparent, var(--color-border), transparent)`,
-        }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-16"
-      >
-        <Motion.div
-          animate={{ y: [0, 20, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-2 h-2 bg-(--color-accent) rounded-full absolute top-0 left-1/2 -translate-x-1/2"
-        />
-      </Motion.div>
-    </section>
+      <div className="scroll-indicator absolute bottom-12 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-2 text-(--color-text-tertiary)">
+         <div className="relative w-6 h-10 border-2 border-current rounded-full flex justify-center p-1">
+            <div className="mouse-wheel w-1 h-2 bg-current rounded-full" />
+         </div>
+      </div>
+    </ParallaxSection>
   );
 };
 

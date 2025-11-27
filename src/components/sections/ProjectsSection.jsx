@@ -1,18 +1,22 @@
-import { useState, memo, useMemo } from "react";
+import { useState, memo, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { motion as Motion } from "motion/react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ChevronLeft, ChevronRight, Folder, Github, Layers } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { PROJECTS_DATA } from "@/data/portfolioData";
+import { projectsData } from "@/data";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import ProjectFilters from "./projects/ProjectFilters";
 import ProjectCard from "./projects/ProjectCard";
 import UnavailableModal from "./projects/UnavailableModal";
-import ProjectsBackground from "./projects/ProjectsBackground";
+import { ParallaxSection } from "@/components/ui";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const CATEGORIES = ["All", "Frontend", "Backend", "Fullstack"];
 
@@ -42,80 +46,134 @@ const ProjectsSection = memo(() => {
   const { t } = useTranslation();
   const [filter, setFilter] = useState("All");
   const [showUnavailableModal, setShowUnavailableModal] = useState(false);
+  const containerRef = useRef(null);
 
   useScrollLock(showUnavailableModal);
 
   const filteredProjects = useMemo(
-    () => filterProjects(PROJECTS_DATA, filter),
+    () => filterProjects(projectsData, filter),
     [filter]
   );
 
   const handleUnavailableClick = () => setShowUnavailableModal(true);
   const handleCloseModal = () => setShowUnavailableModal(false);
 
+  useGSAP(
+    () => {
+      // Header Reveal
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".projects-header",
+          start: "top 80%",
+        },
+        defaults: { ease: "power4.out", duration: 1.2 }
+      });
+
+      tl.fromTo(
+        ".projects-badge",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8 }
+      );
+
+      tl.fromTo(
+        ".projects-title",
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1 },
+        "-=0.6"
+      );
+
+      tl.fromTo(
+        ".projects-subtitle",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1 },
+        "-=0.8"
+      );
+
+      // Filters Animation
+      gsap.fromTo(
+        ".projects-filters",
+        { y: 30, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: ".projects-filters",
+            start: "top 85%",
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
+
+      // Carousel Animation
+      gsap.fromTo(
+        ".projects-carousel",
+        { y: 50, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: ".projects-carousel",
+            start: "top 85%",
+          },
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
   return (
     <>
-      <section
+      <ParallaxSection
         id="projects"
-        className="py-16 md:py-24 min-h-screen relative overflow-hidden bg-(--color-bg-primary)"
+        className="py-20 md:py-32 min-h-screen bg-(--color-bg-primary)"
+        floatingIcons={[
+          <Folder size={80} key="folder" />,
+          <Github size={70} key="github" />,
+          <Layers size={75} key="layers" />
+        ]}
+        orbColors={["from-pink-500/10 to-rose-500/10", "from-purple-500/10 to-indigo-500/10"]}
       >
-        <ProjectsBackground />
-
-        <div className="container mx-auto px-6 relative z-10">
+        <div ref={containerRef} className="container mx-auto px-6 relative z-10">
           {/* Header */}
-          <Motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="max-w-3xl mx-auto text-center mb-16"
-          >
-            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full text-sm font-medium bg-(--color-surface) border border-(--color-border) text-(--color-text-secondary) mb-6">
-              <span className="inline-flex rounded-full h-2.5 w-2.5 bg-(--color-accent)" />
+          <div className="projects-header max-w-3xl mx-auto text-center mb-16 space-y-6">
+            <div className="projects-badge inline-flex items-center gap-3 px-4 py-2 rounded-full text-xs font-medium tracking-wide uppercase bg-(--color-surface) border border-(--color-border) text-(--color-text-secondary) backdrop-blur-sm">
+              <span className="inline-flex rounded-full h-2 w-2 bg-(--color-accent)" />
               Portfolio
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-(--color-text-primary)">
+            <h1 className="projects-title text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-(--color-text-primary)">
               {t("projects.page_title")}
             </h1>
 
-            <p className="text-lg md:text-xl text-(--color-text-secondary)">
+            <p className="projects-subtitle text-lg md:text-xl text-(--color-text-secondary) font-light">
               {t("projects.page_subtitle")}
             </p>
-          </Motion.div>
+          </div>
 
           {/* Filter Tabs */}
-          <Motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
+          <div className="projects-filters">
             <ProjectFilters
               categories={CATEGORIES}
               activeFilter={filter}
               onFilterChange={setFilter}
             />
-          </Motion.div>
+          </div>
 
           {/* Swiper Carousel */}
-          <Motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative max-w-7xl mx-auto"
-          >
+          <div className="projects-carousel relative max-w-7xl mx-auto">
             {/* Navigation Buttons */}
             <button
               aria-label="Previous project"
-              className="swiper-button-prev-custom absolute -left-16 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-(--color-accent) text-(--color-bg-primary) hover:scale-110 transition-all disabled:opacity-50"
+              className="swiper-button-prev-custom absolute -left-4 md:-left-16 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-(--color-bg-secondary) border border-(--color-border) text-(--color-text-primary) hover:bg-(--color-accent) hover:text-(--color-bg-primary) transition-all disabled:opacity-50 shadow-lg"
             >
               <ChevronLeft size={24} />
             </button>
             <button
               aria-label="Next project"
-              className="swiper-button-next-custom absolute -right-16 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-(--color-accent) text-(--color-bg-primary) hover:scale-110 transition-all disabled:opacity-50"
+              className="swiper-button-next-custom absolute -right-4 md:-right-16 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-(--color-bg-secondary) border border-(--color-border) text-(--color-text-primary) hover:bg-(--color-accent) hover:text-(--color-bg-primary) transition-all disabled:opacity-50 shadow-lg"
             >
               <ChevronRight size={24} />
             </button>
@@ -140,7 +198,7 @@ const ProjectsSection = memo(() => {
                 640: { slidesPerView: 2 },
                 1024: { slidesPerView: 3 },
               }}
-              className="pb-12!"
+              className="!pt-8 !pb-16"
             >
               {filteredProjects.map((project) => (
                 <SwiperSlide key={project.id} className="h-auto">
@@ -151,7 +209,7 @@ const ProjectsSection = memo(() => {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </Motion.div>
+          </div>
 
           {/* Empty State */}
           {filteredProjects.length === 0 && (
@@ -162,7 +220,7 @@ const ProjectsSection = memo(() => {
             </div>
           )}
         </div>
-      </section>
+      </ParallaxSection>
 
       <UnavailableModal
         isOpen={showUnavailableModal}

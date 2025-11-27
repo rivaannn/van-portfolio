@@ -45,7 +45,7 @@
     "subtitle": "Saya sangat bersemangat untuk berkontribusi pada dunia digital melalui solusi kreatif dan inovatif.",
     "p1": "Lulusan S1 Teknik Informatika dengan kompetensi utama dalam pengembangan antarmuka web modern menggunakan HTML, CSS, JavaScript, serta framework seperti React.js dan Tailwind CSS.",
     "p2": "Berpengalaman membangun fitur frontend yang responsif, mengimplementasikan desain antarmuka, dan berkolaborasi dalam pengembangan produk digital melalui program Bangkit Academy 2024.",
-    "quote": "\"Kualitas bukanlah tindakan, melainkan kebiasaan.\"",
+    "quote": "\"Segala sesuatu yang dapat kamu bayangkan adalah nyata.\"",
     "download_cv": "Unduh CV"
   },
   "experience": {
@@ -79,8 +79,8 @@
     }
   },
   "data": {
-    "ewastepas_desc": "Platform pengelolaan sampah elektronik yang dibangun dengan React dan Tailwind CSS.",
-    "babygrowth_desc": "Backend RESTful API untuk monitoring pertumbuhan anak menggunakan Node.js dan GCP.",
+    "ewastepas_desc": "Platform untuk antar jemput sampah elektronik yang dibangun dengan React dan Tailwind CSS.",
+    "babygrowth_desc": "Backend RESTful API untuk prediksi pertumbuhan bayi menggunakan Node.js dan GCP.",
     "taskflow_desc": "Platform manajemen proyek modern dengan real-time collaboration dan analytics.",
     "ecommerce_desc": "Dashboard komprehensif yang dibangun dengan React 19 dan Recharts.",
     "social_desc": "Platform sosial real-time dengan integrasi WebSocket.",

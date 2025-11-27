@@ -2,7 +2,7 @@ import { memo } from "react";
 import PropTypes from "prop-types";
 import { ExternalLink, Github } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Card } from "../../ui/Card";
+import { Card, Badge, Button, LazyImage } from "@/components/ui";
 
 const ProjectCard = memo(({ project, onUnavailableClick }) => {
   const { t } = useTranslation();
@@ -15,44 +15,54 @@ const ProjectCard = memo(({ project, onUnavailableClick }) => {
         className="h-full flex flex-col min-h-[450px]"
       >
         {/* Image */}
-        <div className="relative h-56 overflow-hidden bg-(--color-bg-tertiary) shadow-sm">
-          <img
+        <div className="relative h-56 overflow-hidden bg-(--color-bg-tertiary) shadow-sm rounded-t-[14px]">
+          <LazyImage
             src={project.image}
             alt={project.title}
-            loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full"
           />
 
           {/* Overlay on Hover */}
           <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
             {project.link ? (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-full transition-all duration-200 bg-(--color-accent) text-(--color-bg-primary) hover:scale-110 active:scale-95"
+              <Button
+                asChild
+                size="icon"
+                className="rounded-full transition-all duration-200 bg-(--color-accent) text-(--color-bg-primary) hover:opacity-90 border-none"
                 title="Visit Website"
               >
-                <ExternalLink size={20} />
-              </a>
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink size={20} />
+                </a>
+              </Button>
             ) : (
-              <button
+              <Button
+                size="icon"
                 onClick={onUnavailableClick}
-                className="p-3 rounded-full transition-all duration-200 bg-(--color-accent) text-(--color-bg-primary) hover:scale-110 active:scale-95"
+                className="rounded-full transition-all duration-200 bg-(--color-accent) text-(--color-bg-primary) hover:opacity-90 border-none"
                 title="Website Unavailable"
               >
                 <ExternalLink size={20} />
-              </button>
+              </Button>
             )}
-            <a
-              href={project.repo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full transition-all duration-200 bg-(--color-accent) text-(--color-bg-primary) hover:scale-110 active:scale-95"
+            <Button
+              asChild
+              size="icon"
+              className="rounded-full transition-all duration-200 bg-(--color-accent) text-(--color-bg-primary) hover:opacity-90 border-none"
               title="View Repository"
             >
-              <Github size={20} />
-            </a>
+              <a
+                href={project.repo}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github size={20} />
+              </a>
+            </Button>
           </div>
         </div>
 
@@ -69,12 +79,13 @@ const ProjectCard = memo(({ project, onUnavailableClick }) => {
           {/* Tech Stack */}
           <div className="flex flex-wrap gap-2 mt-auto">
             {project.tech.map((tech) => (
-              <span
+              <Badge
                 key={tech}
-                className="px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 cursor-default bg-(--color-overlay) text-(--color-text-secondary) hover:bg-(--color-overlay-hover) hover:scale-105"
+                variant="secondary"
+                className="px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 cursor-default bg-(--color-overlay) text-(--color-text-secondary) hover:bg-(--color-overlay-hover) border-none"
               >
                 {tech}
-              </span>
+              </Badge>
             ))}
           </div>
         </div>

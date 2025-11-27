@@ -1,26 +1,32 @@
-import { motion as Motion } from "motion/react";
+import { useRef } from "react";
 import PropTypes from "prop-types";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 /**
  * ProfilePhoto Component
- * Clean profile photo with breathing animation
  */
 const ProfilePhoto = ({ src, alt, className = "" }) => {
+  const containerRef = useRef(null);
+
+  useGSAP(
+    () => {
+      gsap.to(".profile-container", {
+        y: -15,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <div className={`relative aspect-3/4 max-w-sm mx-auto ${className}`}>
-      {/* Simple up and down animation */}
-      <Motion.div
-        animate={{
-          y: [0, -15, 0],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="relative w-full h-full"
-      >
-        {/* Photo container with gradient border */}
+    <div ref={containerRef} className={`relative aspect-3/4 max-w-sm mx-auto ${className}`}>
+      {/* Animation Container */}
+      <div className="profile-container relative w-full h-full">
+        {/* Photo */}
         <div className="relative w-full h-full rounded-3xl overflow-hidden bg-linear-to-br from-(--color-accent) via-(--color-text-primary) to-(--color-accent) p-0.5">
           <div className="w-full h-full rounded-3xl overflow-hidden bg-(--color-bg-primary)">
             <img
@@ -36,9 +42,9 @@ const ProfilePhoto = ({ src, alt, className = "" }) => {
           </div>
         </div>
 
-        {/* Glow effect */}
+        {/* Glow */}
         <div className="absolute inset-0 bg-(--color-accent) rounded-3xl blur-2xl opacity-20 -z-10" />
-      </Motion.div>
+      </div>
     </div>
   );
 };

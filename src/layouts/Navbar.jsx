@@ -5,24 +5,22 @@ import PropTypes from "prop-types";
 import Lenis from "lenis";
 import { useLanguage } from "@/hooks";
 import { ThemeToggle } from "@/components";
-import { NAV_LINKS } from "@/data/portfolioData";
+import { navLinks } from "@/data";
 import vanPhoto from "@/assets/images/van.jpg";
 
 function NavBrand({ onNavigate }) {
-  const [showName, setShowName] = useState(false);
+
 
   return (
     <div className="flex items-center">
       <button
         onClick={() => onNavigate("home")}
         className="group relative"
-        onMouseEnter={() => setShowName(true)}
-        onMouseLeave={() => setShowName(false)}
         aria-label="Go to home"
       >
         <div className="flex items-center gap-3">
           <div className="relative">
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 transition-all border-(--color-border) group-hover:border-(--color-accent)">
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-(--color-border)">
               <img
                 src={vanPhoto}
                 alt="M Rivan Sahronie"
@@ -36,12 +34,10 @@ function NavBrand({ onNavigate }) {
             </div>
           </div>
 
-          {/* Name - Show on Hover */}
-          {showName && (
-            <span className="font-semibold whitespace-nowrap text-(--color-text-primary) animate-fade-in">
-              M Rivan Sahronie
-            </span>
-          )}
+          {/* Name */}
+          <span className="font-semibold whitespace-nowrap text-(--color-text-primary)">
+            M Rivan Sahronie
+          </span>
         </div>
       </button>
     </div>
@@ -59,7 +55,7 @@ function NavLinks({ activeSection, onNavigate, className = "" }) {
     <nav
       className={`items-center gap-1 absolute left-1/2 -translate-x-1/2 ${className}`}
     >
-      {NAV_LINKS.map((link) => {
+      {navLinks.map((link) => {
         const sectionId = link.path.replace("#", "");
         const isActive = activeSection === sectionId;
 
@@ -139,12 +135,12 @@ function MobileMenu({ isOpen, activeSection, onNavigate, onClose }) {
         onClick={onClose}
       />
 
-      {/* Menu Content - Centered */}
+      {/* Menu Content */}
       <div className="relative h-full flex items-center justify-center p-8">
         <nav className="w-full max-w-md">
           {/* Navigation Links */}
           <div className="space-y-3">
-            {NAV_LINKS.map((link) => {
+            {navLinks.map((link) => {
               const sectionId = link.path.replace("#", "");
               const isActive = activeSection === sectionId;
 
@@ -176,7 +172,7 @@ function MobileMenu({ isOpen, activeSection, onNavigate, onClose }) {
           </div>
         </nav>
 
-        {/* Close Button - Top Right */}
+        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute top-8 right-8 p-4 rounded-full transition-all hover:scale-105 active:scale-95 bg-(--color-surface) hover:bg-(--color-surface-hover) border border-(--color-border)"
@@ -196,9 +192,11 @@ MobileMenu.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
+import { useNavigationStore } from "@/store";
+
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+  const { activeSection, setActiveSection } = useNavigationStore();
   const [scrolled, setScrolled] = useState(false);
   const lenisInstanceRef = useRef(null);
 
@@ -207,7 +205,7 @@ export default function Navbar() {
     lenisInstanceRef.current = window.lenis;
   }, []);
 
-  // Track active section based on scroll position
+  // Track active section
   useEffect(() => {
     let ticking = false;
     let lastScrollY = 0;
@@ -226,7 +224,7 @@ export default function Navbar() {
       }
     };
 
-    // Use Intersection Observer for active section
+    // Observer for active section
     const observerOptions = {
       rootMargin: "-20% 0px -60% 0px",
       threshold: [0, 0.25, 0.5],
@@ -246,21 +244,18 @@ export default function Navbar() {
         }
       });
 
-      // Sort by position (topmost visible section wins)
+      // Sort by position
       intersectingSections.sort((a, b) => a.top - b.top);
 
       // Update active section
       if (intersectingSections.length > 0) {
         const newSection = intersectingSections[0].id;
-        setActiveSection((prev) => {
-          // Only update if different to prevent unnecessary re-renders
-          return prev !== newSection ? newSection : prev;
-        });
+        setActiveSection(newSection);
       }
     }, observerOptions);
 
     // Observe all sections
-    const sections = NAV_LINKS.map((link) => link.path.substring(1));
+    const sections = navLinks.map((link) => link.path.substring(1));
     sections.forEach((sectionId) => {
       const element = document.getElementById(sectionId);
       if (element) observer.observe(element);
@@ -273,9 +268,9 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
       observer.disconnect();
     };
-  }, []);
+  }, [setActiveSection]);
 
-  // Smooth scroll to section using Lenis
+  // Smooth scroll
   const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
     if (!element) return;
@@ -295,7 +290,7 @@ export default function Navbar() {
 
     // Immediately set active section for instant feedback
     setActiveSection(sectionId);
-  }, []);
+  }, [setActiveSection]);
 
   // Handle navigation click
   const handleNavClick = useCallback(
@@ -331,14 +326,14 @@ export default function Navbar() {
           <div
             className={`relative flex items-center px-6 py-3 rounded-full transition-all duration-300 border ${
               scrolled
-                ? "border-(--color-border) bg-(--color-bg-primary)/95"
-                : "border-(--color-border) bg-(--color-bg-primary)/90"
+                ? "border-(--color-border) bg-(--color-bg-primary)/95 shadow-sm"
+                : "border-transparent bg-(--color-bg-primary)/80"
             }`}
           >
             {/* Brand */}
             <NavBrand onNavigate={handleNavClick} />
 
-            {/* Desktop Navigation */}
+            {/* Desktop Nav */}
             <NavLinks
               activeSection={activeSection}
               onNavigate={handleNavClick}
@@ -349,7 +344,7 @@ export default function Navbar() {
             <div className="ml-auto flex items-center gap-2">
               <NavActions />
 
-              {/* Mobile Menu Toggle */}
+              {/* Mobile Toggle */}
               <button
                 onClick={toggleMobileMenu}
                 className="lg:hidden px-2.5 py-2 rounded-full transition-all hover:scale-105 active:scale-95 bg-(--color-overlay) hover:bg-(--color-overlay-hover)"

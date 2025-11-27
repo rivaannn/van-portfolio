@@ -1,12 +1,11 @@
 import PropTypes from "prop-types";
-import { ScrollToTop, AnimatedBackground } from "@/components";
+import { ScrollToTop } from "@/components";
 import Navbar from "@/layouts/Navbar";
 import Footer from "@/layouts/Footer";
 
 const MainLayout = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen relative">
-      <AnimatedBackground />
       <Navbar />
 
       <main className="grow relative z-1">

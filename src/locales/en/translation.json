@@ -45,7 +45,7 @@
     "subtitle": "I am passionate about contributing to the digital world through creative and innovative solutions.",
     "p1": "Informatics Engineering graduate with core competencies in modern web interface development using HTML, CSS, JavaScript, and frameworks such as React.js and Tailwind CSS.",
     "p2": "Experienced in building responsive frontend features, implementing user interface designs, and collaborating in cross-functional product development through the Bangkit Academy 2024 program.",
-    "quote": "\"Quality is not an act, it is a habit.\"",
+    "quote": "\"Everything you can imagine is real.\"",
     "download_cv": "Download CV"
   },
   "experience": {
@@ -79,8 +79,8 @@
     }
   },
   "data": {
-    "ewastepas_desc": "Electronic waste collection platform built with React and Tailwind CSS.",
-    "babygrowth_desc": "RESTful API backend for child growth monitoring using Node.js and GCP.",
+    "ewastepas_desc": "A platform for electronic waste collection built with React and Tailwind CSS.",
+    "babygrowth_desc": "Backend RESTful API for predicting infant growth using Node.js and GCP.",
     "taskflow_desc": "Modern project management platform with real-time collaboration and analytics.",
     "ecommerce_desc": "A comprehensive dashboard built with React 19 and Recharts.",
     "social_desc": "Real-time social platform with WebSocket integration.",

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
+
 @import "tailwindcss";
 
 @theme {
@@ -7,44 +7,44 @@
 
 /* CSS Variables for Theme */
 :root[data-theme="light"] {
-  --color-background: #f8fafc;
-  --color-bg-primary: #f8fafc;
-  --color-bg-secondary: #ffffff;
+  --color-background: #ffffff;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
   --color-bg-tertiary: #f1f5f9;
   --color-text-primary: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-tertiary: #64748b;
+  --color-text-secondary: #64748b;
+  --color-text-tertiary: #94a3b8;
   --color-border: #e2e8f0;
   --color-border-hover: #cbd5e1;
   --color-accent: #0f172a;
-  --color-accent-hover: #1e293b;
-  --color-surface: rgba(255, 255, 255, 0.9);
-  --color-surface-hover: rgba(255, 255, 255, 0.95);
-  --color-overlay: rgba(0, 0, 0, 0.05);
-  --color-overlay-hover: rgba(0, 0, 0, 0.1);
+  --color-accent-hover: #334155;
+  --color-surface: rgba(255, 255, 255, 0.8);
+  --color-surface-hover: rgba(255, 255, 255, 0.9);
+  --color-overlay: rgba(0, 0, 0, 0.03);
+  --color-overlay-hover: rgba(0, 0, 0, 0.06);
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
 }
 
 :root[data-theme="dark"] {
-  --color-background: #0a0a0a;
-  --color-bg-primary: #0a0a0a;
-  --color-bg-secondary: #171717;
-  --color-bg-tertiary: #262626;
-  --color-text-primary: #ededed;
-  --color-text-secondary: #a3a3a3;
-  --color-text-tertiary: #737373;
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-border-hover: rgba(255, 255, 255, 0.2);
+  --color-background: #050505;
+  --color-bg-primary: #050505;
+  --color-bg-secondary: #0a0a0a;
+  --color-bg-tertiary: #171717;
+  --color-text-primary: #fafafa;
+  --color-text-secondary: #a1a1aa;
+  --color-text-tertiary: #525252;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
   --color-accent: #ffffff;
-  --color-accent-hover: #f5f5f5;
-  --color-surface: rgba(23, 23, 23, 0.9);
-  --color-surface-hover: rgba(23, 23, 23, 0.95);
-  --color-overlay: rgba(255, 255, 255, 0.05);
-  --color-overlay-hover: rgba(255, 255, 255, 0.1);
+  --color-accent-hover: #e5e5e5;
+  --color-surface: rgba(10, 10, 10, 0.8);
+  --color-surface-hover: rgba(10, 10, 10, 0.9);
+  --color-overlay: rgba(255, 255, 255, 0.03);
+  --color-overlay-hover: rgba(255, 255, 255, 0.08);
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
@@ -76,9 +76,8 @@ body {
   color: var(--color-bg-primary);
 }
 
-/* Smooth Scroll */
+/* Smooth Scroll - Handled by Lenis, removed native behavior */
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
 
@@ -99,20 +98,20 @@ html {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: var(--color-bg-tertiary);
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-text-tertiary);
-  border-radius: 4px;
+  background-color: var(--color-border);
+  border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-text-secondary);
+  background-color: var(--color-text-tertiary);
 }
 
 /* Minimal animations for components that need it */

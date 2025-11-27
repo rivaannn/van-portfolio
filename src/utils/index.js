@@ -1,5 +1,5 @@
 export * from "./dateUtils";
-export * from "./animationVariants";
+
 
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";

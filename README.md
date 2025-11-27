@@ -2,10 +2,10 @@
 
 # Muhamad Rivan Sahronie
 
-**Full Stack Developer • UI/UX Enthusiast • Cloud Computing**
+**Web Developer • UI/UX Enthusiast**
 
 <p align="center">
-  <i>"Quality is not an act, it is a habit."</i>
+  <i>"Everything you can imagine is real."</i>
 </p>
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-Live-00C7B7?style=for-the-badge&logo=vercel)](https://van-portfolio.vercel.app)
