@@ -20,9 +20,10 @@ const HeroContent = ({ t, typedName, className }) => {
       <div className="relative w-full min-h-20 sm:min-h-24 md:min-h-32 flex items-center justify-center">
         <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-(--color-text-primary) whitespace-nowrap overflow-visible">
           <span>{typedName}</span>
-          <span className="animate-pulse text-(--color-accent) inline-block ml-1">
-            |
-          </span>
+          {/* Dot */}
+          <span className="text-sky-500">.</span>
+          {/* Cursor */}
+          <span className="animate-pulse inline-block">|</span>
         </h1>
       </div>
 
