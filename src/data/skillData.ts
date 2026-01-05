@@ -1,13 +1,13 @@
 import * as TechIcons from "@/assets/LogoTech/index";
 
 export const skillData = {
-  frontend: {
-    title: "Frontend",
+  development: {
+    title: "Web Application Development",
     skills: [
       { name: "HTML", icon: TechIcons.HtmlIcon },
       { name: "CSS", icon: TechIcons.CssIcon },
       { name: "JavaScript", icon: TechIcons.JavascriptIcon },
-      { name: "Typescript", icon: TechIcons.TypescriptIcon },
+      { name: "TypeScript", icon: TechIcons.TypescriptIcon },
       { name: "React", icon: TechIcons.ReactIcon },
       { name: "Next.js", icon: TechIcons.NextIcon },
       { name: "Tailwind", icon: TechIcons.TailwindIcon },
@@ -15,7 +15,7 @@ export const skillData = {
     ],
   },
   backend: {
-    title: "Backend",
+    title: "Frontend & Backend Integration",
     skills: [
       { name: "Node.js", icon: TechIcons.NodeIcon },
       { name: "PHP", icon: TechIcons.PhpIcon },
@@ -23,7 +23,7 @@ export const skillData = {
     ],
   },
   tools: {
-    title: "Tools & Others",
+    title: "Tools & Cloud",
     skills: [
       { name: "Git", icon: TechIcons.GitIcon },
       { name: "GCP", icon: TechIcons.GcpIcon },

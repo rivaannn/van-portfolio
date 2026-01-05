@@ -14,6 +14,7 @@ export { default as ScrollToTop } from "./ScrollToTop";
 export { default as SectionSkeleton } from "./SectionSkeleton";
 export { default as ParallaxSection } from "./ParallaxSection";
 export { default as ThemeToggle } from "./ThemeToggle";
+export { default as LanguageSwitch } from "./LanguageSwitch";
 
 // Common Components
 export { default as Container } from "./Container";

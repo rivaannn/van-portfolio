@@ -10,7 +10,7 @@ const SkillSection = memo(() => {
   const { isDark } = useTheme();
 
   const allSkills = [
-    ...skillData.frontend.skills,
+    ...skillData.development.skills,
     ...skillData.backend.skills,
     ...skillData.tools.skills,
   ];

@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Menu, X, Globe } from "lucide-react";
-import { useLanguage, useScrollLock } from "@/hooks/index";
+import { Menu, X } from "lucide-react";
+import { useScrollLock } from "@/hooks/index";
 import { smoothScrollTo } from "@/utils/index";
 import { contactData, navLinks } from "@/data/index";
-import { ThemeToggle } from "@/components/ui/index";
+import { ThemeToggle, LanguageSwitch } from "@/components/ui/index";
 import MobileMenu from "@/layouts/MobileNavbar";
 import ppVan from "@/assets/images/ppvan.jpg";
 
@@ -65,21 +65,6 @@ const NavLinks = ({ activeSection, onNavigate, className }: NavLinksProps) => {
         );
       })}
     </nav>
-  );
-};
-
-const LanguageSwitch = () => {
-  const { language, toggleLanguage } = useLanguage();
-
-  return (
-    <button
-      onClick={toggleLanguage}
-      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-(--color-overlay-hover) transition-all duration-200 text-xs font-medium text-(--color-text-primary) cursor-pointer active:scale-95"
-      aria-label={`Switch to ${language === "en" ? "Indonesian" : "English"}`}
-    >
-      <Globe size={16} className="text-(--color-text-secondary)" />
-      <span>{language.substring(0, 2).toUpperCase()}</span>
-    </button>
   );
 };
 

@@ -1,82 +1,96 @@
 {
-  "nav": {
-    "home": "Beranda",
-    "about": "Tentang",
-    "skills": "Keahlian",
-    "experience": "Pengalaman",
-    "projects": "Proyek",
-    "contact": "Kontak"
-  },
-  "hero": {
-    "title_1": "Halo, saya",
-    "title_highlight": "Muhamad Rivan Sahronie",
-    "title_2": "Web Developer",
-    "view_work": "Lihat Karya",
-    "subtitle": "Saya senang membangun pengalaman web yang interaktif.",
-    "description": "Membangun website modern dengan pendekatan yang sederhana, efisien, dan berorientasi pada pengguna",
-    "cta_primary": "Hubungi Saya",
-    "cta_secondary": "Lihat Proyek"
-  },
-  "skills": {
-    "badge": "Teknologi",
-    "title": "Tech Stack",
-    "subtitle": "Teknologi yang saya gunakan untuk membangun produk luar biasa."
-  },
-  "projects": {
-    "badge": "Karya Unggulan",
-    "latest_title": "Berikut beberapa proyek favorit saya.",
-    "view_all": "Lihat Semua Proyek",
-    "page_title": "Karya Terpilih",
-    "page_subtitle": "Galeri proyek pengembangan terbaru saya.",
-    "unavailable_title": "Proyek Sedang Dikembangkan",
-    "unavailable_desc": "Proyek ini sedang dalam tahap pengembangan dan belum dapat diakses secara publik. Silakan cek kembali nanti atau jelajahi kode sumber di GitHub.",
-    "close": "Tutup"
-  },
-  "about": {
-    "badge": "Tentang Saya",
-    "title": "Di Balik Kode",
-    "subtitle": "Saya sangat bersemangat untuk berkontribusi pada dunia digital melalui solusi kreatif dan inovatif.",
-    "p1": "Lulusan S1 Teknik Informatika dengan kompetensi utama dalam pengembangan antarmuka web modern menggunakan HTML, CSS, JavaScript.",
-    "p2": "Berpengalaman membangun fitur frontend yang responsif, mengimplementasikan desain antarmuka, dan berkolaborasi dalam pengembangan produk digital melalui program Bangkit Academy 2024.",
-    "quote": "\"Segala sesuatu yang dapat kamu bayangkan adalah nyata.\"",
-    "download_cv": "Unduh CV"
-  },
-  "experience": {
-    "badge": "Pengalaman Kerja",
-    "title": "Perjalanan Profesional",
-    "subtitle": "Pengalaman profesional dan pencapaian karir."
-  },
-  "contact": {
-    "title": "Mari Terhubung",
-    "subtitle": "Punya ide proyek? Mari wujudkan ide Anda menjadi kenyataan.",
-    "get_in_touch": "Hubungi saya",
-    "desc": "Saya selalu terbuka untuk mendiskusikan proyek baru, ide kreatif, atau kesempatan untuk menjadi bagian dari visi Anda.",
-    "form": {
-      "name": "Nama Anda",
-      "email": "Alamat Email",
-      "message": "Pesan",
-      "send": "Kirim Pesan",
-      "sending": "Mengirim...",
-      "success_title": "Pesan Terkirim!",
-      "success_desc": "Terima kasih telah menghubungi. Saya akan segera membalas pesan Anda."
+    "nav": {
+        "home": "Beranda",
+        "about": "Tentang",
+        "skills": "Keahlian",
+        "experience": "Pengalaman",
+        "projects": "Proyek",
+        "education": "Pendidikan",
+        "contact": "Kontak"
     },
-    "info": {
-      "email": "Email",
-      "location": "Lokasi",
-      "phone": "Telepon"
+    "hero": {
+        "title_1": "Halo, saya",
+        "title_highlight": "Muhamad Rivan Sahronie",
+        "title_2": "Web Developer",
+        "view_work": "Lihat Karya",
+        "subtitle": "Web Developer dengan latar belakang S1 Teknik Informatika",
+        "description": "Berpengalaman dalam pengembangan aplikasi web melalui program magang, proyek akademik, dan program industri. Terbiasa bekerja dalam tim pengembangan dan memahami alur pengembangan aplikasi.",
+        "cta_primary": "Hubungi Saya",
+        "cta_secondary": "Lihat Proyek"
+    },
+    "skills": {
+        "badge": "Keahlian",
+        "title": "Kompetensi Teknis",
+        "subtitle": "Keterampilan yang saya kembangkan melalui pengalaman akademik dan industri."
+    },
+    "projects": {
+        "badge": "Proyek",
+        "latest_title": "Berikut beberapa proyek yang telah saya kerjakan.",
+        "view_all": "Lihat Semua Proyek",
+        "page_title": "Proyek Terpilih",
+        "page_subtitle": "Galeri proyek pengembangan yang telah saya kerjakan.",
+        "unavailable_title": "Proyek Sedang Dikembangkan",
+        "unavailable_desc": "Proyek ini sedang dalam tahap pengembangan dan belum dapat diakses secara publik. Silakan cek kembali nanti atau jelajahi kode sumber di GitHub.",
+        "close": "Tutup"
+    },
+    "about": {
+        "badge": "Tentang Saya",
+        "title": "Profil Profesional",
+        "subtitle": "Web Developer dengan motivasi tinggi untuk berkembang dan siap berkontribusi pada lingkungan kerja profesional.",
+        "p1": "Web Developer dengan latar belakang S1 Teknik Informatika dan pengalaman dalam pengembangan aplikasi web melalui program magang, proyek akademik, dan program industri.",
+        "p2": "Terbiasa bekerja dalam tim pengembangan, memahami alur pengembangan aplikasi, serta terlibat dalam pengembangan sistem berbasis cloud pada proyek berskala nasional.",
+        "quote": "\"Memiliki motivasi tinggi untuk berkembang dan siap berkontribusi pada lingkungan kerja profesional.\"",
+        "download_cv": "Unduh CV"
+    },
+    "experience": {
+        "badge": "Pengalaman Kerja",
+        "title": "Perjalanan Profesional",
+        "subtitle": "Pengalaman dalam pengembangan aplikasi web melalui program magang, proyek akademik, dan program industri."
+    },
+    "education": {
+        "badge": "Riwayat Pendidikan",
+        "title": "Pendidikan",
+        "subtitle": "Latar belakang akademik dan program pembelajaran industri."
+    },
+    "contact": {
+        "title": "Hubungi Saya",
+        "subtitle": "Saya siap untuk berdiskusi mengenai peluang kerja dan kolaborasi.",
+        "get_in_touch": "Hubungi saya",
+        "desc": "Saya terbuka untuk mendiskusikan kesempatan kerja, proyek kolaboratif, atau peluang untuk berkontribusi pada tim pengembangan.",
+        "form": {
+            "name": "Nama Anda",
+            "email": "Alamat Email",
+            "message": "Pesan",
+            "send": "Kirim Pesan",
+            "sending": "Mengirim...",
+            "success_title": "Pesan Terkirim!",
+            "success_desc": "Terima kasih telah menghubungi. Saya akan segera membalas pesan Anda."
+        },
+        "info": {
+            "email": "Email",
+            "location": "Lokasi",
+            "phone": "Telepon"
+        }
+    },
+    "data": {
+        "ewastepas_desc": "Mengembangkan aplikasi web sebagai bagian dari tugas akhir sarjana. Menerapkan konsep desain responsif dan pendekatan pengembangan aplikasi berbasis kebutuhan pengguna.",
+        "babygrowth_desc": "Berkontribusi dalam pengembangan sistem aplikasi berbasis cloud. Terlibat dalam proses integrasi layanan aplikasi pada proyek kolaboratif berskala nasional.",
+        "exp_gdc_role": "Curriculum Developer – Cloud Computing",
+        "exp_gdc_company": "Google Developer on Campus, Universitas Pasundan",
+        "exp_gdc_desc": "Berkontribusi dalam penyusunan materi pembelajaran cloud computing untuk kebutuhan internal komunitas kampus. Terlibat dalam kegiatan mentoring dan workshop pengembangan aplikasi berbasis cloud. Bekerja sama dengan tim lintas peran dalam menjalankan program pembelajaran berbasis proyek.",
+        "exp_bangkit_role": "Software Development Trainee – Capstone Project",
+        "exp_bangkit_company": "Bangkit Academy 2024 – MBKM",
+        "exp_bangkit_desc": "Terlibat dalam pengembangan aplikasi berbasis cloud sebagai bagian dari program industri nasional. Bekerja dalam tim lintas disiplin untuk mengembangkan solusi aplikasi berbasis kebutuhan pengguna. Proyek tim memperoleh pengakuan sebagai Top 50 Best Product-Based Capstone Project dari lebih dari 200 tim secara nasional.",
+        "exp_granesia_role": "Web Developer - Magang",
+        "exp_granesia_company": "PT. Granesia Group Pikiran Rakyat",
+        "exp_granesia_desc": "Terlibat dalam pengembangan website company profile untuk kebutuhan internal perusahaan. Menyesuaikan tampilan dan struktur halaman agar dapat digunakan secara optimal di berbagai perangkat. Bekerja sama dengan tim internal dalam proses pengembangan dan penyesuaian konten website.",
+        "edu_unpas_name": "Universitas Pasundan",
+        "edu_unpas_degree": "Sarjana Teknik Informatika",
+        "edu_unpas_gpa": "IPK: 3.63 / 4.00",
+        "edu_unpas_period": "September 2021 – Oktober 2025",
+        "edu_bangkit_name": "Bangkit Academy",
+        "edu_bangkit_program": "Program MBKM – Cloud Computing",
+        "edu_bangkit_period": "Februari 2024 – Juli 2024",
+        "edu_bangkit_led_by": "Dipimpin oleh Google, Tokopedia, Gojek, Traveloka"
     }
-  },
-  "data": {
-    "ewastepas_desc": "Platform untuk antar jemput sampah elektronik yang dibangun dengan React dan Tailwind CSS.",
-    "babygrowth_desc": "Backend RESTful API untuk prediksi pertumbuhan bayi menggunakan Node.js dan GCP.",
-    "exp_gdc_role": "Pengembang Kurikulum – Cloud Computing",
-    "exp_gdc_company": "Google Developer On Campus – Universitas Pasundan",
-    "exp_gdc_desc": "Menyusun materi pembelajaran terkait Google Cloud Platform, API Integration, dan deployment. Menyelenggarakan workshop internal dan mentoring untuk mahasiswa.",
-    "exp_bangkit_role": "Peserta Cohort Cloud Computing",
-    "exp_bangkit_company": "Bangkit Academy dipimpin oleh Google, Tokopedia, Gojek, & Traveloka",
-    "exp_bangkit_desc": "Mempelajari arsitektur cloud, REST API integration, dan cloud deployment pada Google Cloud Platform. Mengembangkan capstone project kolaboratif mencakup integrasi Machine Learning, API backend, dan Compute Engine.",
-    "exp_granesia_role": "Magang Web Developer",
-    "exp_granesia_company": "PT. Granesia Group Pikiran Rakyat",
-    "exp_granesia_desc": "Membantu pembuatan website company profile perusahaan menggunakan PHP, HTML, CSS, dan JavaScript. Bertanggung jawab pada pembuatan struktur halaman, pengaturan tampilan antarmuka."
-  }
 }

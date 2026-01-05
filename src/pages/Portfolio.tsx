@@ -9,9 +9,11 @@ const SkillSection = lazy(() => import("@/components/sections/SkillSection"));
 const ExperienceSection = lazy(
   () => import("@/components/sections/ExperienceSection")
 );
-
 const ProjectsSection = lazy(
   () => import("@/components/sections/ProjectsSection")
+);
+const EducationSection = lazy(
+  () => import("@/components/sections/EducationSection")
 );
 const ContactSection = lazy(
   () => import("@/components/sections/ContactSection")
@@ -53,6 +55,11 @@ const Portfolio = () => {
           {/* Projects */}
           <Suspense fallback={<SectionSkeleton />}>
             <ProjectsSection />
+          </Suspense>
+
+          {/* Education */}
+          <Suspense fallback={<SectionSkeleton />}>
+            <EducationSection />
           </Suspense>
 
           {/* Contact */}

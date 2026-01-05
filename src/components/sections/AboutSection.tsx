@@ -41,14 +41,9 @@ const AboutSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center max-w-7xl mx-auto">
           {/* Left: Text Content */}
           <div className="about-content space-y-8">
-            <h1 className="about-title text-4xl md:text-5xl lg:text-6xl font-light leading-tight text-(--color-text-primary) tracking-tight opacity-0">
+            <h2 className="about-title text-3xl md:text-5xl font-bold tracking-tight text-(--color-text-primary) opacity-0">
               {t("about.title")}
-            </h1>
-
-            <p className="about-subtitle text-xl md:text-2xl text-(--color-text-secondary) font-light opacity-0">
-              {t("about.subtitle")}
-            </p>
-
+            </h2>
             <div className="space-y-6 text-lg leading-relaxed text-(--color-text-secondary) font-light text-justify">
               <p className="about-text opacity-0">{t("about.p1")}</p>
               <p className="about-text opacity-0">{t("about.p2")}</p>

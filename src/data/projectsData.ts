@@ -5,7 +5,7 @@ export const projectsData = [
     id: 1,
     title: "EWastepas",
     desc: "data.ewastepas_desc",
-    tech: ["React", "Tailwind", "Progressive Web App"],
+    tech: ["React", "Tailwind CSS", "Progressive Web App"],
     image: ProjectImages.ewastepasImg,
     link: "https://ewastepas.my.id",
     repo: "https://github.com/orgs/Ewastepas/repositories",
