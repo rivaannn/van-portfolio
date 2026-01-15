@@ -15,7 +15,6 @@ export default defineConfig({
   },
   plugins: [react(), tailwindcss()],
   build: {
-    // Performance optimizations
     target: "esnext",
     minify: "terser",
     terserOptions: {
@@ -28,9 +27,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // Vendor chunking for better caching
           if (id.includes("node_modules")) {
-            // React vendor chunk
+            // React
             if (
               id.includes("react") ||
               id.includes("react-dom") ||
@@ -38,31 +36,22 @@ export default defineConfig({
             ) {
               return "react";
             }
-            // Animation vendor chunk
-            if (id.includes("animejs")) {
-              return "animation";
+            // Framer Motion
+            if (id.includes("framer-motion")) {
+              return "motion";
             }
-            // Swiper vendor chunk
-            if (id.includes("swiper")) {
-              return "swiper";
-            }
-            // i18n vendor chunk
+            // i18n
             if (id.includes("i18next") || id.includes("react-i18next")) {
               return "i18n";
             }
-            // Icons vendor chunk
+            // Icons
             if (id.includes("lucide-react")) {
               return "icons";
-            }
-            // Lenis smooth scroll
-            if (id.includes("lenis")) {
-              return "lenis";
             }
             // Other vendor packages
             return "vendor";
           }
         },
-        // Asset naming for better caching
         chunkFileNames: "assets/js/[name]-[hash].js",
         entryFileNames: "assets/js/[name]-[hash].js",
         assetFileNames: (assetInfo) => {
@@ -78,15 +67,18 @@ export default defineConfig({
         },
       },
     },
-    // Optimize chunk size
     chunkSizeWarningLimit: 1000,
     cssCodeSplit: true,
     sourcemap: false,
   },
-
-  // Optimize deps
   optimizeDeps: {
-    include: ["react", "react-dom", "react-i18next", "i18next", "lenis"],
+    include: [
+      "react",
+      "react-dom",
+      "react-i18next",
+      "i18next",
+      "framer-motion",
+    ],
     exclude: ["lucide-react"],
   },
 });

@@ -1,3 +1,5 @@
+// Context Definitions
+// Type-safe React contexts for theme and language state
 import { createContext } from "react";
 
 export interface ThemeContextType {

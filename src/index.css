@@ -1,92 +1,135 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Mulish", sans-serif;
+  --font-sans: "Mulish", system-ui, sans-serif;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* CSS Variables for Theme */
+/* color palette */
 :root[data-theme="light"] {
-  --color-background: #ffffff;
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8fafc;
-  --color-bg-tertiary: #f1f5f9;
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #64748b;
-  --color-text-tertiary: #94a3b8;
-  --color-border: #e2e8f0;
-  --color-border-hover: #cbd5e1;
-  --color-accent: #0f172a;
-  --color-accent-hover: #334155;
-  --color-surface: rgba(255, 255, 255, 0.8);
-  --color-surface-hover: rgba(255, 255, 255, 0.9);
-  --color-overlay: rgba(0, 0, 0, 0.03);
-  --color-overlay-hover: rgba(0, 0, 0, 0.06);
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  --color-bg: #ffffff;
+  --color-fg: #0a0a0a;
+  --color-muted: #525252;
+  --color-subtle: #a3a3a3;
+  --color-border: #e5e5e5;
 }
 
 :root[data-theme="dark"] {
-  --color-background: #050505;
-  --color-bg-primary: #050505;
-  --color-bg-secondary: #0a0a0a;
-  --color-bg-tertiary: #171717;
+  --color-bg: #0a0a0a;
+  --color-fg: #fafafa;
+  --color-muted: #a3a3a3;
+  --color-subtle: #525252;
+  --color-border: #262626;
+}
+
+/* Legacy variable mappings for compatibility */
+:root[data-theme="light"] {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #fafafa;
+  --color-bg-tertiary: #f5f5f5;
+  --color-text-primary: #171717;
+  --color-text-secondary: #737373;
+  --color-text-tertiary: #a3a3a3;
+  --color-accent: #171717;
+  --color-surface: rgba(255, 255, 255, 0.9);
+  --color-overlay: rgba(0, 0, 0, 0.04);
+  --color-overlay-hover: rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme="dark"] {
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #141414;
+  --color-bg-tertiary: #1f1f1f;
   --color-text-primary: #fafafa;
-  --color-text-secondary: #a1a1aa;
+  --color-text-secondary: #a3a3a3;
   --color-text-tertiary: #525252;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.15);
-  --color-accent: #ffffff;
-  --color-accent-hover: #e5e5e5;
-  --color-surface: rgba(10, 10, 10, 0.8);
-  --color-surface-hover: rgba(10, 10, 10, 0.9);
-  --color-overlay: rgba(255, 255, 255, 0.03);
+  --color-accent: #fafafa;
+  --color-surface: rgba(20, 20, 20, 0.9);
+  --color-overlay: rgba(255, 255, 255, 0.04);
   --color-overlay-hover: rgba(255, 255, 255, 0.08);
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
 }
 
 :root {
   color-scheme: light dark;
 }
 
+/* base styles */
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
-  overflow-x: hidden;
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
   transition: background-color 0.3s ease, color 0.3s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  font-feature-settings: "kern" 1;
-  font-kerning: normal;
 }
 
-/* Selection */
 ::selection {
-  background-color: var(--color-accent);
-  color: var(--color-bg-primary);
+  background-color: var(--color-fg);
+  color: var(--color-bg);
 }
 
-/* Smooth Scroll - Handled by Lenis, removed native behavior */
-html {
-  scroll-padding-top: 80px;
+/* typography system */
+
+/* Display - Hero headlines */
+.text-display {
+  font-size: clamp(3.5rem, 12vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-weight: 800;
 }
 
+/* Headline - Section titles */
+.text-headline {
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+/* Title - Subsection headers */
+.text-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+/* Body - Paragraph text */
+.text-body {
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* Label - UI elements, metadata */
+.text-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Caption - Small contextual text */
+.text-caption {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* reduce motion */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
   *,
   *::before,
   *::after {
@@ -94,22 +137,4 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--color-border);
-  border-radius: 99px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-text-tertiary);
 }

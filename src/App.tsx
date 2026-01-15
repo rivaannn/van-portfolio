@@ -1,10 +1,7 @@
-import { useLenis } from "@/hooks";
-import Portfolio from "@/pages/Portfolio";
+import EditorialPage from "@/pages/EditorialPage";
 
 function App() {
-  useLenis();
-
-  return <Portfolio />;
+  return <EditorialPage />;
 }
 
 export default App;

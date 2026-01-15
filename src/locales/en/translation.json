@@ -1,96 +1,38 @@
 {
-    "nav": {
-        "home": "Home",
-        "about": "About",
-        "skills": "Skills",
-        "experience": "Experience",
-        "projects": "Projects",
-        "education": "Education",
-        "contact": "Contact"
-    },
-    "hero": {
-        "title_1": "Hello, I'm",
-        "title_highlight": "Muhamad Rivan Sahronie",
-        "title_2": "Web Developer",
-        "view_work": "My Work",
-        "subtitle": "Web Developer with a Bachelor's degree in Informatics Engineering",
-        "description": "Hands-on experience in web application development through internships, academic projects, and industry-based programs. Accustomed to working in collaborative development environments.",
-        "cta_primary": "Get In Touch",
-        "cta_secondary": "See Projects"
-    },
-    "skills": {
-        "badge": "Skills",
-        "title": "Technical Competencies",
-        "subtitle": "Skills developed through academic and industry experience."
-    },
-    "projects": {
-        "badge": "Projects",
-        "latest_title": "Here are some projects I have worked on.",
-        "view_all": "View All Projects",
-        "page_title": "Selected Projects",
-        "page_subtitle": "A gallery of development projects I have worked on.",
-        "unavailable_title": "Project Under Development",
-        "unavailable_desc": "This project is currently in development and not yet publicly accessible. Please check back later or explore the source code on GitHub.",
-        "close": "Close"
-    },
-    "about": {
-        "badge": "About Me",
-        "title": "Professional Profile",
-        "subtitle": "Highly motivated to grow as a software professional and ready to contribute to remote and distributed teams.",
-        "p1": "Web Developer with a Bachelor's degree in Informatics Engineering and hands-on experience in web application development through internships, academic projects, and industry-based programs.",
-        "p2": "Accustomed to working in collaborative development environments, understanding application workflows, and contributing to cloud-based systems in nationally recognized projects.",
-        "quote": "\"Highly motivated to grow as a software professional and ready to contribute to remote and distributed teams.\"",
-        "download_cv": "Download CV"
-    },
-    "experience": {
-        "badge": "Work Experience",
-        "title": "Professional Journey",
-        "subtitle": "Experience in web application development through internships, academic projects, and industry-based programs."
-    },
-    "education": {
-        "badge": "Education",
-        "title": "Education",
-        "subtitle": "Academic background and industry learning programs."
-    },
-    "contact": {
-        "title": "Get In Touch",
-        "subtitle": "I am open to discussing job opportunities and collaboration.",
-        "get_in_touch": "Get in touch",
-        "desc": "I am open to discussing job opportunities, collaborative projects, or opportunities to contribute to development teams.",
-        "form": {
-            "name": "Your Name",
-            "email": "Email Address",
-            "message": "Message",
-            "send": "Send Message",
-            "sending": "Sending...",
-            "success_title": "Message Sent!",
-            "success_desc": "Thank you for reaching out. I'll get back to you shortly."
-        },
-        "info": {
-            "email": "Email",
-            "location": "Location",
-            "phone": "Phone"
-        }
-    },
-    "data": {
-        "ewastepas_desc": "Developed a web application as part of a bachelor's final project. Applied responsive design principles and user-centered development approaches.",
-        "babygrowth_desc": "Contributed to the development of a cloud-based application in a collaborative project environment. Involved in application service integration within a nationally scaled project.",
-        "exp_gdc_role": "Curriculum Developer – Cloud Computing",
-        "exp_gdc_company": "Google Developer on Campus, Universitas Pasundan",
-        "exp_gdc_desc": "Contributed to the development of cloud computing learning materials for internal campus community programs. Participated in mentoring sessions and technical workshops related to cloud-based application development. Collaborated with cross-functional teams to support project-based learning initiatives.",
-        "exp_bangkit_role": "Software Development Trainee – Capstone Project",
-        "exp_bangkit_company": "Bangkit Academy 2024 – MBKM",
-        "exp_bangkit_desc": "Participated in the development of a cloud-based application as part of a national industry-driven program. Worked in a cross-disciplinary team to deliver application features aligned with user and business requirements. The project was recognized as a Top 50 Best Product-Based Capstone Project among more than 200 teams nationwide.",
-        "exp_granesia_role": "Web Developer Intern",
-        "exp_granesia_company": "PT. Granesia Group Pikiran Rakyat",
-        "exp_granesia_desc": "Contributed to the development of a company profile website for internal and public-facing use. Adapted page layouts and structures to ensure responsive and cross-device compatibility. Collaborated with internal teams to align website content with organizational needs.",
-        "edu_unpas_name": "Universitas Pasundan",
-        "edu_unpas_degree": "Bachelor of Informatics Engineering",
-        "edu_unpas_gpa": "GPA: 3.63 / 4.00",
-        "edu_unpas_period": "September 2021 – October 2025",
-        "edu_bangkit_name": "Bangkit Academy",
-        "edu_bangkit_program": "MBKM Program – Cloud Computing",
-        "edu_bangkit_period": "February 2024 – July 2024",
-        "edu_bangkit_led_by": "Led by Google, Tokopedia, Gojek, Traveloka"
-    }
+  "editorial": {
+    "available": "Open to work",
+    "statement": "I build the web with curiosity and intention.",
+    "contact": "Say hello",
+    "return": "Back",
+    "projects_intro": "Each project shaped how I approach problems.",
+    "journey_intro": "Roles that taught me how to build and collaborate.",
+    "foundations_intro": "Where I built my understanding."
+  },
+
+  "data": {
+    "ewastepas_desc": "A web application for electronic waste management. Focused on responsive design and user experience.",
+    "babygrowth_desc": "Cloud-based health tracking application. National-scale project recognized among top 50 capstone projects.",
+
+    "exp_gdc_role": "Curriculum Developer",
+    "exp_gdc_company": "Google Developer on Campus",
+    "exp_gdc_desc": "Developed cloud computing learning materials. Mentored in technical workshops and project-based programs.",
+
+    "exp_bangkit_role": "Software Development Trainee",
+    "exp_bangkit_company": "Bangkit Academy 2024",
+    "exp_bangkit_desc": "Built cloud-based applications in cross-functional teams. Project recognized as Top 50 among 200+ teams nationwide.",
+
+    "exp_granesia_role": "Web Developer Intern",
+    "exp_granesia_company": "PT. Granesia Group",
+    "exp_granesia_desc": "Developed company profile website. Ensured responsive design and cross-device compatibility.",
+
+    "edu_unpas_name": "Universitas Pasundan",
+    "edu_unpas_degree": "B.S. Informatics Engineering",
+    "edu_unpas_gpa": "GPA: 3.63 / 4.00",
+    "edu_unpas_period": "2021 – 2025",
+
+    "edu_bangkit_name": "Bangkit Academy",
+    "edu_bangkit_program": "Cloud Computing Track",
+    "edu_bangkit_period": "Feb – Jul 2024",
+    "edu_bangkit_led_by": "Google, Tokopedia, Gojek, Traveloka"
+  }
 }

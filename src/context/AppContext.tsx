@@ -1,3 +1,5 @@
+// AppProvider Component
+// Combines all context providers for the application
 import type { ReactNode } from "react";
 import { ThemeProvider } from "./ThemeContext";
 import { LanguageProvider } from "./LanguageContext";

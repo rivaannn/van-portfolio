@@ -1,7 +1,10 @@
+// LanguageProvider Component
+// Manages English/Indonesian language state with localStorage persistence
+// Integrates with i18next for translations
 import { useState, useEffect, useCallback, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { LanguageContext } from "./contexts";
-import { storage } from "../utils";
+import { storage } from "@/utils";
 
 interface LanguageProviderProps {
   children: ReactNode;

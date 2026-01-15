@@ -1,6 +1,10 @@
+/**
+ * ThemeProvider Component
+ * Manages dark/light theme state with localStorage persistence
+ */
 import { useState, useEffect, useCallback, type ReactNode } from "react";
 import { ThemeContext } from "./contexts";
-import { storage } from "../utils";
+import { storage } from "@/utils";
 
 interface ThemeProviderProps {
   children: ReactNode;
@@ -27,7 +31,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     setTheme(theme === "dark" ? "light" : "dark");
   }, [theme, setTheme]);
 
-  // Initialize theme on mount
+  // Apply theme on mount
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute("data-theme", theme);

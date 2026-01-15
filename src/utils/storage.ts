@@ -1,3 +1,4 @@
+// Storage Utility
 export const storage = {
   get<T>(key: string, fallback: T | null = null): T | null {
     try {
@@ -7,11 +8,12 @@ export const storage = {
       return fallback;
     }
   },
-  set<T>(key: string, value: T) {
+
+  set<T>(key: string, value: T): void {
     try {
       localStorage.setItem(key, JSON.stringify(value));
     } catch {
-      // Storage full or blocked
+      // Storage full or blocked - fail silently
     }
   },
 };
